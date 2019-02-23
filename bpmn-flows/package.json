@@ -1,0 +1,67 @@
+{
+  "name": "@nihasoft/bpmn-flows",
+  "version": "0.1.1",
+  "description": "Mechanism to view and edit bpmn 2.0 in angular",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "rxjs": "^5.5.6"
+  },
+  "scripts": {
+    "copy": "cpx src/lib/bpmn-flows.component.scss dist/bpmn-flows/ && cpx src/lib/bpmn-flows.variables.scss dist/bpmn-flows/ && cpx ../README.md dist/bpmn-flows",
+    "build-prod": "ng build --prod && npm run copy",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "publish": "npm run build-prod && cd dist/bpmn-flows && npm publish --access=public",
+    "publish-beta": "npm run build-prod && cd dist/bpmn-flows && npm publish --access=public --tag beta"
+  },
+  "dependencies": {
+    "@angular/animations": "^6.1.2",
+    "@angular/common": "^6.1.2",
+    "@angular/compiler": "^6.1.2",
+    "@angular/core": "^6.1.2",
+    "@fortawesome/fontawesome-free": "^5.7.2",
+    "d3": "^5.9.1",
+    "zone.js": "~0.8.26"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.7.0",
+    "@angular-devkit/build-ng-packagr": "^0.13.3",
+    "@angular/cli": "~6.1.2",
+    "@angular/compiler-cli": "^6.1.2",
+    "cpx": "^1.5.0",
+    "ng-packagr": "^4.7.1",
+    "typescript": "^3.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hanor/bpmn-flows.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hanor/bpmn-flows/issues"
+  },
+  "donations": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=96LEHU7G2Z2MC",
+  "keywords": [
+    "angular bpmn",
+    "bpmn",
+    "camunda bpmn",
+    "camunda angular",
+    "bpmn typescript",
+    "bpmn 2.0",
+    "angular 6 bpmn",
+    "angular 6 bpmn 2.0",
+    "bpmn angular",
+    "bpmn camunda",
+    "angular camunda bpmn",
+    "camunda angular bpmn",
+    "bpmn camunda angular",
+    "bpmn-flows",
+    "bpmn flows",
+    "angular bpmn-flows",
+    "flows bpmn",
+    "@nihasoft"
+  ],
+  "author": "Hanor Sátiro Cintra <hanor.cintra@outlook.com>",
+  "license": "MIT"
+}

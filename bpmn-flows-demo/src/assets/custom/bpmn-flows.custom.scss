@@ -1,0 +1,26 @@
+@import 'variables.scss';
+
+.bpmn-flows-rect {
+    stroke: $bpmn-flows-rect-color;
+}
+.bpmn-flows-circle {
+    stroke: $bpmn-flows-circle-color;
+}
+.bpmn-flows-text {
+    color: $bpmn-flows-text-color;
+}
+.bpmn-flows-marker {
+    stroke: $bpmn-flows-marker-color;
+}
+
+.bpmn-flows-path {
+    stroke: $bpmn-flows-sequence-color;
+}
+
+.bpmn-flows-task-icon {
+    color: $bpmn-flows-icon-color;
+}
+
+.bpmn-flows-shadow {
+    stroke: $bpmn-flows-shadow-color;
+}

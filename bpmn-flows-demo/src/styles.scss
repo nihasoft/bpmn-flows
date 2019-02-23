@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+
+@import '~@nihasoft/bpmn-flows/bpmn-flows.component.scss';
+@import 'assets/custom/bpmn-flows.custom.scss';
+@import 'assets/custom/variables.scss';
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    background: $ui-container;
+}

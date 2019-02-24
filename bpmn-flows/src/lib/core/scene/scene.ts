@@ -126,6 +126,8 @@ export class Scene {
     private renderCircle( shape: Shape, element: PrimitiveCircle) {
         let name = shape.name;
         let circle = element.svgElement.append('circle');
+        let foreignObject = element.svgElement.append('foreignObject').attr('y', 0).attr('x', 0)
+        let div = foreignObject.append('xhtml:div')
 
         circle.attr('cx', '16');
         circle.attr('cy', '16');
@@ -139,6 +141,10 @@ export class Scene {
             text.attr('transform', 'translate('+ translate +')');
             text.text(name);
         }
+
+        foreignObject.attr('style', 'width: '+ (element.width) +'px; height:'+ (element.height) +'px;')
+        div.attr('style', 'float:left; width: '+ (element.width) +'px; height:'+ (element.height) +'px;')
+        div.attr('class', element.icon +' '+ element.iconCssClass);   
 
         element.svgElement.attr('transform', 'translate( '+ element.position.x +', '+ element.position.y +' )')
         this.setCenterEye(element.position, element.width, element.height);
@@ -181,6 +187,7 @@ export class Scene {
             text.text(name);
         }
 
+        foreignObject.attr('style', 'width: '+ (element.width) +'px; height:'+ (element.height) +'px;')
         div.attr('style', 'float:left; width: '+ (element.width) +'px; height:'+ (element.height) +'px;')
         div.attr('class', element.icon +' '+ element.iconCssClass);       
 
@@ -226,8 +233,9 @@ export class Scene {
         let taskName = shape.name;
 
         if (element.icon) {
-            element.svgElement.append('foreignObject').attr('y', 5).attr('x', 5)
-            .append('xhtml:span').attr('class', element.iconCssClass + ' ' + element.icon);
+            let foreignObject = element.svgElement.append('foreignObject').attr('y', 5).attr('x', 5);
+            foreignObject.attr('style', 'width: 20px; height: 20px;')
+            foreignObject.append('xhtml:span').attr('class', element.iconCssClass + ' ' + element.icon);
         }
 
         if (taskName) {

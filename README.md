@@ -9,7 +9,8 @@ In this moment, this lib only enable viewer from an existing bpmn 2.0 file.
 
 ## Status
 
-BpmnFlows is under development and some features will come in the future. If you have some idea or got an error, please, open an issue here https://github.com/Hanor/BpmnFlows/issues. Help me to give a great BPMN 2.0 library to the Angular.
+BpmnFlows is under development and some features will come in the future. If you have some idea or got an error, please, open an issue here https://github.com/nihasoft/bpmn-flows/issues. Help me to give a great BPMN 2.0 library to the Angular.
+`Angular version: 7.2.6`
 
 ## Demo
 

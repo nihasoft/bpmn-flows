@@ -5,7 +5,8 @@
   "scripts": {
     "copy": "cpx src/lib/bpmn-flows.component.scss dist/bpmn-flows/ && cpx src/lib/bpmn-flows.variables.scss dist/bpmn-flows/ && cpx ../README.md dist/bpmn-flows",
     "copy-dist": "cpx dist/ ../bpmn-flows-demo/node_modules/@nihasoft/",
-    "build-prod": "ng build --prod && npm run copy",
+    "build-prod": "npm run test-prod && ng build --prod && npm run copy",
+    "test-prod": "ng test --watch=false",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -22,12 +23,13 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
-    "d3": "^5.9.1"
+    "d3": "^5.9.1",
+    "intl": "^1.2.5"
   },
   "devDependencies": {
-    "@angular/animations": "^7.2.6",
     "@angular-devkit/build-angular": "~0.13.3",
     "@angular-devkit/build-ng-packagr": "^0.13.3",
+    "@angular/animations": "^7.2.6",
     "@angular/cli": "~7.3.3",
     "@angular/common": "^7.2.6",
     "@angular/compiler": "^7.2.6",
@@ -53,7 +55,7 @@
     "tsickle": "^0.34.3",
     "tslib": "^1.9.0",
     "tslint": "~5.13.0",
-    "typescript": "^3.2.4",
+    "typescript": "3.2.4",
     "zone.js": "^0.8.29"
   },
   "repository": {

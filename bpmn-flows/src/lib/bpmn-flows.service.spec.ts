@@ -8,8 +8,4 @@ describe('BpmnFlowsService', () => {
       providers: [BpmnFlowsService]
     });
   });
-
-  it('should be created', inject([BpmnFlowsService], (service: BpmnFlowsService) => {
-    expect(service).toBeTruthy();
-  }));
 });

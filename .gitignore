@@ -55,3 +55,7 @@ Thumbs.db
 *.log
 
 *.cache
+
+bpmn-flows/package-lock\.json
+
+bpmn-flows-demo/package-lock\.json

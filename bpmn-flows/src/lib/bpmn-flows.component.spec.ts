@@ -1,25 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BpmnFlowsComponent } from './bpmn-flows.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { BpmnFlowsService } from './bpmn-flows.service';
 
 describe('BpmnFlowsComponent', () => {
   let component: BpmnFlowsComponent;
   let fixture: ComponentFixture<BpmnFlowsComponent>;
 
   beforeEach(async(() => {
+    spyOn(console, 'warn');
     TestBed.configureTestingModule({
-      declarations: [ BpmnFlowsComponent ]
+      imports: [ HttpClientModule ],
+      declarations: [ BpmnFlowsComponent ],
+      providers: [ BpmnFlowsService, HttpClient ]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(BpmnFlowsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
+  }));
+  it('Should create', () => {
     expect(component).toBeTruthy();
   });
 });

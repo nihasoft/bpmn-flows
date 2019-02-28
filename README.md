@@ -1,5 +1,5 @@
 
-[![Version](https://img.shields.io/badge/Version-0.1.3-yellow.svg)](https://www.npmjs.com/package/@nihasoft/bpmn-flows)
+[![Version](https://img.shields.io/badge/Version-0.1.4-yellow.svg)](https://www.npmjs.com/package/@nihasoft/bpmn-flows)
 [![License](https://img.shields.io/badge/License-MIT-red.svg)](https://raw.githubusercontent.com/nihasoft/bpmn-flows/master/LICENSE)
 [![Build Status](https://travis-ci.org/nihasoft/bpmn-flows.svg?branch=master)](https://travis-ci.org/nihasoft/bpmn-flows)
 [![Demo](https://img.shields.io/badge/Demo-Example-blueviolet.svg)](https://bpmnflows.nihasoft.com) 

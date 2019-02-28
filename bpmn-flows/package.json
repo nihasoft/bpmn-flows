@@ -1,6 +1,6 @@
 {
   "name": "@nihasoft/bpmn-flows",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Mechanism to view and edit bpmn 2.0 in angular",
   "scripts": {
     "copy": "cpx src/lib/bpmn-flows.component.scss dist/bpmn-flows/ && cpx src/lib/bpmn-flows.variables.scss dist/bpmn-flows/ && cpx ../README.md dist/bpmn-flows",

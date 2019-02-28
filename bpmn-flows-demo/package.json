@@ -1,6 +1,6 @@
 {
   "name": "@nihasoft/bpmn-flows-demo",
-  "version": "0.1.8",
+  "version": "0.1.4",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

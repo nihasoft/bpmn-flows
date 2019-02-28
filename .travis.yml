@@ -8,5 +8,5 @@ cache:
     - node_modules
 
 script:
-  - cd bpmn-flows && npm run test
+  - cd bpmn-flows && npm install && npm run test
 

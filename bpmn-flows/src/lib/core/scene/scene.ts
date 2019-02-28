@@ -7,7 +7,7 @@ import { BpmnElements } from '../elements/bpmn.elements';
 import * as d3 from 'd3';
 import { PrimitiveRhombus } from '../elements/shape/primitive.rhombus';
 import { PrimitiveElement } from '../elements/primitive.element';
-import { MultiInstanceRect } from '../elements/shape/multi.instance.rect';
+import { SubProcessRect } from '../elements/shape/sub.process.rect';
 import { ParticipantRect } from '../elements/shape/participant.rect';
 import { LaneRect } from '../elements/shape/lane.rect';
 import { SequenceFlowPath } from '../elements/sequence/sequence.flow.path';
@@ -157,8 +157,8 @@ export class Scene {
         rec.attr('height', element.height);
         rec.attr('class', element.cssClass );
         
-        if (element instanceof MultiInstanceRect) {
-            this.renderMultiInstance(shape, element);
+        if (element instanceof SubProcessRect) {
+            this.renderSubProcess(shape, element);
         } else if (element instanceof ParticipantRect || element instanceof LaneRect) {
             this.renderLane(shape, element);
         } else {
@@ -218,7 +218,7 @@ export class Scene {
         text.attr('y', 15);
         text.text(shape.name);
     }
-    private renderMultiInstance(shape: Shape, element: PrimitiveRect) {
+    private renderSubProcess(shape: Shape, element: PrimitiveRect) {
         let name = shape.name;
         if (name) {
             let text = element.svgElement.append('text');

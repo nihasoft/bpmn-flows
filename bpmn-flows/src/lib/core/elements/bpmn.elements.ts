@@ -11,7 +11,7 @@ export class BpmnElements {
     processName: string;
     processId: string;
     
-    bindElementAndSequence() {
+    bindElementAndSequence(): void {
         const sequenceKeys = Object.keys( this.sequences );
         for( const sequenceKey of sequenceKeys) {
             const sequence:SequenceFlow = this.sequences[ sequenceKey ];
@@ -19,22 +19,25 @@ export class BpmnElements {
             sequence.target.in.push( sequence );
         }
     }
-    calculateRhombusPoints(size: number) {
+    calculateRhombusPoints(size: number): any {
         return size/2 + ',0 ' + size + ',' + size/2 + ' ' + size/2 + ',' + size + ' 0,' + size/2;
     }
-    createElement( xmlElement ): Shape {
-        const shape = new Shape( xmlElement );
-        this.shapes[ shape.id ] = shape;
-        return shape;
+    createElement( xmlElement: any ): Shape {
+        try {
+            const shape = new Shape( xmlElement );
+            this.shapes[ shape.id ] = shape;
+            return shape;
+        } catch (ex) {
+            console.warn('Shape type not found:' + xmlElement);
+        }
     }
-    createSequence(id, name, source, target) {
+    createSequence(id, name, source, target): void {
         const sourceShape = this.shapes[ source ];
         const targetShape = this.shapes[ target ];
 
         if (!sourceShape || !targetShape) {
-            console.warn( source );
-            console.warn( target );
-            throw new Error('Sequencia incompleta.');
+            console.warn('Sequence cannnot be created: ' + source + ', ' + target + ' ID: ' + id);
+            return;
         }
 
         const sequence = new SequenceFlow(id, name, sourceShape, targetShape);
@@ -42,12 +45,20 @@ export class BpmnElements {
     }
     setSequenceNamePlacement(id, position) {
         const sequence: SequenceFlow = this.sequences[id];
+
+        if (!sequence) {
+            console.warn('Sequence not found:' + id);
+            return;
+        }
+
         sequence.element.textPosition = position;
     }
     setSequenceWaypoints(id, waypoints) {
         const sequence: SequenceFlow = this.sequences[id];
+
         if (!sequence) {
-            throw new Error('Sequência não criada: ' + id);
+            console.warn('Sequence has not created.: ' + id);
+            return;
         }
         const element: PrimitiveSequence = sequence.element;
         element.waypoints.push(waypoints);
@@ -55,8 +66,8 @@ export class BpmnElements {
     setShapeAttributes(id: string, width: number, height: number, position: any): void {
         const shape:Shape = this.shapes[ id ];
         if ( !shape ) {
-            console.warn( 'Shape não existe: ' + id );
-            throw new Error('Shape não conhecida.');
+            console.warn( 'Shape not found: ' + id );
+            return;
         }
 
         if ( shape.element instanceof PrimitiveRect ) {
@@ -78,11 +89,17 @@ export class BpmnElements {
             element.points = this.calculateRhombusPoints(element.width);
         } else {
             console.warn( shape.element );
-            throw new Error('Shape não conhecida.');
+            throw new Error('Dont know this shape');
         }
     }
-    setShapeNamePlacement(id: string, position) {
+    setShapeNamePlacement(id: string, position) : void {
         let shape: Shape = this.shapes[id];
+
+        if (!shape) {
+            console.warn('Shape not found: ' + id);
+            return;
+        }
+
         shape.element.textPosition = position;
     }
 }

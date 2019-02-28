@@ -27,20 +27,20 @@ export class BpmnFlowsService {
       this.bpmnImporter.bpmnElements$.subscribe(( bpmnElements ) => {
           this.bpmnElements = bpmnElements;
           if ( this.bpmnElements ) {
-              this.renderBpmn();
+            this.renderBpmn();
           }
       })
   }
   eventRenderedBpmn() {
       this.scene.loaded$.subscribe(( loaded ) => {
-          if ( loaded ) {
-              
+          if (loaded) {
+              console.log("Loaded...")
           }
       })
   }
-  getBpmnDiagram( bpmnFilePath ) {
-      this.http.get( bpmnFilePath,  {responseType: 'text'}).subscribe(( response ) => {
-          this.bpmnDiagramParser( response );
+  getBpmnDiagram( bpmnFilePath ): void {
+      this.http.get(bpmnFilePath, {responseType: 'text'}).subscribe(( response ) => {
+        this.bpmnDiagramParser( response );
       })
   }
   renderBpmn() {

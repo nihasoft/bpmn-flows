@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'FlowsBpmn';
-  fileUrl = 'assets/diagram.bpmn'
+  fileUrl = 'assets/all.bpmn'
 }

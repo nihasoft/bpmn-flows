@@ -1,7 +1,7 @@
 import { UserTaskRect } from './shape/user.task.rect';
 import { StartEventCircle } from './shape/start.event.circle';
 import { EndEventCircle } from './shape/end.event.circle';
-import { MultiInstanceRect } from './shape/multi.instance.rect'
+import { SubProcessRect } from './shape/sub.process.rect'
 import { SequenceFlowPath } from './sequence/sequence.flow.path'
 import { ExclusiveGatewayRhombus } from './shape/exclusive.gateway.rhombus';
 import { ParallelGatewayRhombus } from './shape/parallel.gateway.rhombus';
@@ -16,7 +16,8 @@ export const BpmnTypes = {
     'manualTask': ManualTaskRect,
     'startEvent': StartEventCircle,
     'endEvent': EndEventCircle,
-    'subProcess': MultiInstanceRect,
+    'subProcess': SubProcessRect,
+    'adHocSubProcess': SubProcessRect,
     'sequenceFlow': SequenceFlowPath,
     'exclusiveGateway': ExclusiveGatewayRhombus,
     'parallelGateway': ParallelGatewayRhombus,

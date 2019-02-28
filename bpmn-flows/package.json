@@ -5,7 +5,7 @@
   "scripts": {
     "copy": "cpx src/lib/bpmn-flows.component.scss dist/bpmn-flows/ && cpx src/lib/bpmn-flows.variables.scss dist/bpmn-flows/ && cpx ../README.md dist/bpmn-flows",
     "copy-dist": "cpx dist/ ../bpmn-flows-demo/node_modules/@nihasoft/",
-    "build-prod": "ng build --prod && npm run copy",
+    "build-prod": "ng test && ng build --prod && npm run copy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -16,8 +16,8 @@
   "peerDependencies": {
     "@angular/animations": "^7.2.6",
     "@angular/common": "^7.2.6",
-    "@angular/compiler": "^7.2.6",
     "@angular/core": "^7.2.6",
+    "@angular/compiler": "^7.2.6",
     "zone.js": "~0.8.26"
   },
   "dependencies": {
@@ -25,14 +25,35 @@
     "d3": "^5.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.7.0",
+    "@angular-devkit/build-angular": "~0.13.3",
     "@angular-devkit/build-ng-packagr": "^0.13.3",
     "@angular/cli": "~7.3.3",
+    "@angular/common": "^7.2.6",
+    "@angular/compiler": "^7.2.6",
     "@angular/compiler-cli": "^7.2.6",
+    "@angular/core": "^7.2.6",
+    "@angular/platform-browser": "^7.2.6",
+    "@angular/platform-browser-dynamic": "^7.2.6",
+    "@types/jasmine": "~2.8.6",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
+    "codelyzer": "~4.5.0",
     "cpx": "^1.5.0",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "^4.0.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.0",
+    "karma-jasmine": "~1.1.1",
+    "karma-jasmine-html-reporter": "^0.2.2",
     "ng-packagr": "^4.7.1",
+    "protractor": "^5.4.0",
+    "ts-node": "~5.0.1",
     "tsickle": "^0.34.3",
-    "typescript": "^3.2.4"
+    "tslib": "^1.9.0",
+    "tslint": "~5.13.0",
+    "typescript": "^3.2.4",
+    "zone.js": "^0.8.29"
   },
   "repository": {
     "type": "git",

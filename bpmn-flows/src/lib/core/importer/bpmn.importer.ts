@@ -1,6 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
 import { BpmnElements } from '../elements/bpmn.elements';
-import { MultiInstanceRect } from '../elements/shape/multi.instance.rect';
 import { Shape } from '../elements/shape/shape.model';
 import { LaneRect } from '../elements/shape/lane.rect';
 
@@ -50,7 +49,6 @@ export class BpmnImporter {
     private createShape(dom: any, type: string, father: any): Shape {
         try {
             const xmlElement = {
-                form: dom.getAttribute( 'camunda:formKey' ),
                 id: dom.getAttribute( 'id' ),
                 name: dom.getAttribute( 'name' ),
                 type: type
@@ -62,7 +60,7 @@ export class BpmnImporter {
             return shape;
         } catch ( ex ) {
             console.warn(dom);
-            console.warn('Tipo não possui shape associado: ' + type);
+            console.warn('Shape has not a known type: ' + type);
         }
     }
     private createSubProcess(dom: any, type: string, father: any): Shape {
@@ -72,7 +70,6 @@ export class BpmnImporter {
         const sequences = [];
 
         const xmlElement = {
-            form: dom.getAttribute( 'camunda:formKey' ),
             id: dom.getAttribute( 'id' ),
             name: dom.getAttribute( 'name' ),
             type: type
@@ -123,7 +120,7 @@ export class BpmnImporter {
     }
     private importElement(dom: any, father: any): Shape {
         const type = dom.tagName.split(':')[1];
-        if (type === 'subProcess') {
+        if (type === 'subProcess' || type === 'adHocSubProcess') {
             return this.createSubProcess(dom, type, father);
         } else if (type === 'laneSet' || type === 'lane') {
             return this.createLane(dom, type, father);
@@ -160,7 +157,7 @@ export class BpmnImporter {
         elements.forEach(( element ) => this.importElement( element, null ));
         sequenceFlows.forEach(( sequence ) => this.importSequenceFlow( sequence ));
     }
-    private processDiagram(): void{
+    private processDiagram(): void {
         const plane = this.diagram.getElementsByTagName('bpmndi:BPMNPlane')[0];
         const childs = plane.childNodes;
         childs.forEach((child) => {
@@ -175,7 +172,7 @@ export class BpmnImporter {
             }
         })
     }
-    private processSequences(child): void{
+    private processSequences(child): void {
         const id = child.getAttribute( 'bpmnElement' );
         const childNodes = child.childNodes;
         

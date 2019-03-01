@@ -8,6 +8,7 @@
     "d3",
     "angular",
     "zone.js",
-    "@fortawesome/fontawesome-free"
+    "@fortawesome/fontawesome-free",
+    "intl"
   ]
 }

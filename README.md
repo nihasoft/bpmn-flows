@@ -1,5 +1,9 @@
-[Demo](https://bpmnflows.nihasoft.com) 
-[Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=96LEHU7G2Z2MC)
+
+[![Version](https://img.shields.io/badge/Version-0.1.4-yellow.svg)](https://www.npmjs.com/package/@nihasoft/bpmn-flows)
+[![License](https://img.shields.io/badge/License-MIT-red.svg)](https://raw.githubusercontent.com/nihasoft/bpmn-flows/master/LICENSE)
+[![Build Status](https://travis-ci.org/nihasoft/bpmn-flows.svg?branch=master)](https://travis-ci.org/nihasoft/bpmn-flows)
+[![Demo](https://img.shields.io/badge/Demo-Example-blueviolet.svg)](https://bpmnflows.nihasoft.com) 
+[![Donate](https://img.shields.io/badge/%24-Donate-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=96LEHU7G2Z2MC)
 
 ## BpmnFlows
 

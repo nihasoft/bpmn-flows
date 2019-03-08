@@ -12,12 +12,14 @@ export class Shape {
     out: Array<SequenceFlow>;
     element: PrimitiveElement;
     childrens: Array<Shape> = [];
-    constructor( xmlShape ) {
+    data: any = {}
+    constructor( xmlShape: any ) {
         this.form = xmlShape.form;
         this.id = xmlShape.id;
         this.name = xmlShape.name;
         this.in = [];
         this.out = [];
         this.element = new BpmnTypes[ xmlShape.type ]();
+        this.data = xmlShape.data;
     }
 }

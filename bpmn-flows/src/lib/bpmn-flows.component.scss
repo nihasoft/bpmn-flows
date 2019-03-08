@@ -27,6 +27,11 @@
 .bpmn-flows-end-event-circle {
     stroke-width: 3px;
 }
+
+.bpmn-flows-intermediate-event-circle {
+    stroke-width: 2px;
+    stroke-dasharray: 1px;
+}
 .bpmn-flows-zoom-eye {
     fill: none;
     pointer-events: all;

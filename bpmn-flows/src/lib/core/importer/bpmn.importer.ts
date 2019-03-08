@@ -47,16 +47,22 @@ export class BpmnImporter {
         return shape;
     }
     private createShape(dom: any, type: string, father: any): Shape {
-        try {
+        try 
+        {
             const xmlElement = {
                 id: dom.getAttribute( 'id' ),
                 name: dom.getAttribute( 'name' ),
                 type: type
             };
+
+            // Todo get the childs that isn't incoming or outcoming because the child can be a condition
+
             let shape = this.bpmnElements.createElement( xmlElement );
+
             if ( father ) {
                 shape.father = father;
             }
+
             return shape;
         } catch ( ex ) {
             console.warn(dom);

@@ -7,15 +7,20 @@ module.exports = function (config) {
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
+      requite('karma-scss-prepocessor'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
-      require('@angular-devkit/build-angular/plugins/karma')
+      require('@angular-devkit/build-angular/plugins/karma'),
     ],
     basePath: './src',
     files: [
       {
         pattern: './assets/**', watched: true, included: false, nocache: false, served: true
+      }, { 
+        pattern: './lib/bpmn-flows.component.scss' },
+      { 
+        pattern: './lib/bpmn-flows.variables.scss' 
       }
     ],
     proxies: {

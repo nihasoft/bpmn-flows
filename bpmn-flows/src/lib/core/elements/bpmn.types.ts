@@ -9,6 +9,8 @@ import { ManualTaskRect } from './shape/manual.task.rect';
 import { ScriptTaskRect } from './shape/script.task.rect';
 import { LaneRect } from './shape/lane.rect';
 import { ParticipantRect } from './shape/participant.rect';
+import { BusinessRuleTaskRect } from './shape/business.rule.task.rect';
+import { IntermediateEventCircle } from './shape/intermediate.event.circle';
 
 export const BpmnTypes = {
     'userTask': UserTaskRect,
@@ -22,5 +24,7 @@ export const BpmnTypes = {
     'exclusiveGateway': ExclusiveGatewayRhombus,
     'parallelGateway': ParallelGatewayRhombus,
     'lane': LaneRect,
-    'participant': ParticipantRect
+    'participant': ParticipantRect,
+    'businessRuleTask': BusinessRuleTaskRect,
+    'intermediateThrowEvent': IntermediateEventCircle
 }

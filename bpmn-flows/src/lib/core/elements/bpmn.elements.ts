@@ -32,8 +32,8 @@ export class BpmnElements {
         }
     }
     createSequence(id, name, source, target): void {
-        const sourceShape = this.shapes[ source ];
-        const targetShape = this.shapes[ target ];
+        const sourceShape: Shape = this.shapes[ source ];
+        const targetShape: Shape = this.shapes[ target ];
 
         if (!sourceShape || !targetShape) {
             console.warn('Sequence cannnot be created: ' + source + ', ' + target + ' ID: ' + id);

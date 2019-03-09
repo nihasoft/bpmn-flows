@@ -11,6 +11,8 @@ import { LaneRect } from './shape/lane.rect';
 import { ParticipantRect } from './shape/participant.rect';
 import { BusinessRuleTaskRect } from './shape/business.rule.task.rect';
 import { IntermediateEventCircle } from './shape/intermediate.event.circle';
+import { ServiceTaskRect } from './shape/service.task.rect';
+import { PrimitiveRect } from './shape/primitive.rect';
 
 export const BpmnTypes = {
     'userTask': UserTaskRect,
@@ -26,5 +28,7 @@ export const BpmnTypes = {
     'lane': LaneRect,
     'participant': ParticipantRect,
     'businessRuleTask': BusinessRuleTaskRect,
-    'intermediateThrowEvent': IntermediateEventCircle
+    'intermediateThrowEvent': IntermediateEventCircle,
+    'serviceTask': ServiceTaskRect,
+    'task': PrimitiveRect
 }

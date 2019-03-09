@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { BpmnElements } from '../elements/bpmn.elements';
-import { Shape } from '../elements/shape/shape.model';
+import { BpmnElement } from '../elements/shape/shape.model';
 import { LaneRect } from '../elements/shape/lane.rect';
 
 export class BpmnImporter {
@@ -13,7 +13,7 @@ export class BpmnImporter {
     constructor(xml) {
         this.getElements(xml);
     }
-    private createLane(dom: any, type: string, father: any): Shape {
+    private createLane(dom: any, type: string, father: any): BpmnElement {
         const childs = this.htmlCollectionToArray( dom.children );
         if (type === 'laneSet') {
             for (let lane of childs) {
@@ -22,12 +22,12 @@ export class BpmnImporter {
             return;
         }
         
-        const xmlElement = {
+        const bpmnDocumentElement = {
             id: dom.getAttribute( 'id' ),
             name: dom.getAttribute( 'name' ),
             type: type
         };
-        const shape = this.bpmnElements.createElement(xmlElement);
+        const shape = this.bpmnElements.createElement(bpmnDocumentElement);
         const element = <LaneRect>shape.element;
 
         if ( father ) {
@@ -36,7 +36,7 @@ export class BpmnImporter {
 
         for (let child of childs) {
             if (child.tagName === 'bpmn:flowNodeRef') {
-                element.flowRefs.push(child.childNodes[0]);
+                element.flowRefs.push('' + child.childNodes[0]);
             } else if (child.tagName === 'bpmn:childLaneSet') {
                 const laneChilds = this.htmlCollectionToArray( child.children );
                 for (let laneChild of laneChilds) {
@@ -46,18 +46,32 @@ export class BpmnImporter {
         }
         return shape;
     }
-    private createShape(dom: any, type: string, father: any): Shape {
+    private createShape(dom: HTMLElement, type: string, father: any): BpmnElement {
         try 
         {
-            const xmlElement = {
+            const bpmnDocumentElement: any = {
                 id: dom.getAttribute( 'id' ),
                 name: dom.getAttribute( 'name' ),
-                type: type
+                type: type,
+                data: {}
             };
 
             // Todo get the childs that isn't incoming or outcoming because the child can be a condition
+            let childs = this.htmlCollectionToArray(dom.children);
+            for (let child of childs) {
+                let childType = child.tagName.split(':')[1];
+                if (childType === 'standardLoopCharacteristics') {
+                    bpmnDocumentElement.data.multiple = 'repeat';
+                } else if (childType === 'multiInstanceLoopCharacteristics') {
+                    if (child.getAttribute('isSequential')) {
+                        bpmnDocumentElement.data.multiple = 'multipleSequence';
+                    } else {
+                        bpmnDocumentElement.data.multiple = 'multiple';
+                    }
+                }
+            }
 
-            let shape = this.bpmnElements.createElement( xmlElement );
+            let shape = this.bpmnElements.createElement( bpmnDocumentElement );
 
             if ( father ) {
                 shape.father = father;
@@ -69,7 +83,7 @@ export class BpmnImporter {
             console.warn('Shape has not a known type: ' + type);
         }
     }
-    private createSubProcess(dom: any, type: string, father: any): Shape {
+    private createSubProcess(dom: any, type: string, father: any): BpmnElement {
         const childs = this.htmlCollectionToArray( dom.children );
         const sequenceIn = [];
         const sequenceOut = [];
@@ -80,10 +94,10 @@ export class BpmnImporter {
             name: dom.getAttribute( 'name' ),
             type: type
         };
-        const shape: Shape = this.bpmnElements.createElement( xmlElement );
+        const bpmnElement: BpmnElement = this.bpmnElements.createElement( xmlElement );
 
         if ( father ) {
-            shape.father = father;
+            bpmnElement.father = father;
         }
 
         childs.forEach(( child ) => {
@@ -95,14 +109,14 @@ export class BpmnImporter {
             } else  if ( tagName === 'bpmn:sequenceFlow') {
                 sequences.push( child )
             } else if (child.tagName !== 'bpmn:multiInstanceLoopCharacteristics') {
-                shape.childrens.push(this.importElement( child, shape ));
+                bpmnElement.childrens.push(this.importElement( child, bpmnElement ));
             }
         });
 
         sequences.forEach(( sequence ) => {
             this.importSequenceFlow( sequence );   
         })
-        return shape;
+        return bpmnElement;
     }
     private getElements(xml: any): void {
         this.collaboration = xml.getElementsByTagName('bpmn:collaboration')[0];
@@ -117,14 +131,14 @@ export class BpmnImporter {
     private getNodePosition(node: any): any {
         return {x: parseInt(node.getAttribute('x')), y: parseInt( node.getAttribute('y'))}
     }
-    private htmlCollectionToArray(doms: any): any {
+    private htmlCollectionToArray(doms: HTMLCollection): Array<HTMLElement> {
         const childs = [];
         for( let i = 0; i < doms.length; i++ ) {
             childs.push( doms[i] )
         }
         return childs;
     }
-    private importElement(dom: any, father: any): Shape {
+    private importElement(dom: any, father: any): BpmnElement {
         const type = dom.tagName.split(':')[1];
         if (type === 'subProcess' || type === 'adHocSubProcess') {
             return this.createSubProcess(dom, type, father);
@@ -173,7 +187,7 @@ export class BpmnImporter {
                 } else if (child.tagName === 'bpmndi:BPMNEdge') {
                     this.processSequences(child);
                 } else {
-                    console.warn('Elemento do diagrama não conhecido: ' + child.tagName);
+                    console.warn('Diagram element not known: ' + child.tagName);
                 }
             }
         })
@@ -201,9 +215,13 @@ export class BpmnImporter {
     private processShapes(child: any): void {
         const id: any = child.getAttribute( 'bpmnElement' );
         const childNodes: any = child.childNodes;
-        childNodes.forEach(( node ) => {
-            this.processShapeChild(id, node);
-        })
+        
+        let bpmnElement: BpmnElement = this.bpmnElements.getBpmnElementById(id);
+        if (bpmnElement) {
+            childNodes.forEach(( node ) => {
+                this.processShapeChild(id, node);
+            })
+        }
     }
     private processShapeChild(id: string, node: any) {
         if (node.nodeName !== '#text') {
@@ -217,7 +235,7 @@ export class BpmnImporter {
                 this.bpmnElements.setShapeNamePlacement(id, position);
             } else {
                 console.warn(node);
-                console.warn('Elemento não conhecido.')
+                console.warn('Element not known')
             }
         }
     }

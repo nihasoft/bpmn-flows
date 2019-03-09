@@ -1,4 +1,4 @@
-import { Shape } from './shape/shape.model';
+import { BpmnElement } from './shape/shape.model';
 import { SequenceFlow } from './sequence/sequence.flow.model';
 import { PrimitiveRect } from './shape/primitive.rect';
 import { PrimitiveCircle } from './shape/primitive.circle';
@@ -6,7 +6,7 @@ import { PrimitiveSequence } from './sequence/primitive.sequence';
 import { PrimitiveRhombus } from './shape/primitive.rhombus';
 
 export class BpmnElements {
-    shapes = {};
+    elements = {};
     sequences = {};
     processName: string;
     processId: string;
@@ -22,18 +22,18 @@ export class BpmnElements {
     calculateRhombusPoints(size: number): any {
         return size/2 + ',0 ' + size + ',' + size/2 + ' ' + size/2 + ',' + size + ' 0,' + size/2;
     }
-    createElement( xmlElement: any ): Shape {
+    createElement( bpmnDocumentElement: any ): BpmnElement {
         try {
-            const shape = new Shape( xmlElement );
-            this.shapes[ shape.id ] = shape;
-            return shape;
+            const bpmnElement = new BpmnElement( bpmnDocumentElement );
+            this.elements[ bpmnElement.id ] = bpmnElement;
+            return bpmnElement;
         } catch (ex) {
-            console.warn('Shape type not found:' + xmlElement);
+            console.warn('BpmnElement type not found id: ' + bpmnDocumentElement.id + ', type: ' + bpmnDocumentElement.id);
         }
     }
     createSequence(id, name, source, target): void {
-        const sourceShape: Shape = this.shapes[ source ];
-        const targetShape: Shape = this.shapes[ target ];
+        const sourceShape: BpmnElement = this.elements[ source ];
+        const targetShape: BpmnElement = this.elements[ target ];
 
         if (!sourceShape || !targetShape) {
             console.warn('Sequence cannnot be created: ' + source + ', ' + target + ' ID: ' + id);
@@ -42,6 +42,9 @@ export class BpmnElements {
 
         const sequence = new SequenceFlow(id, name, sourceShape, targetShape);
         this.sequences[ id ] = sequence;
+    }
+    getBpmnElementById(id: string): BpmnElement {
+        return this.elements[id];
     }
     setSequenceNamePlacement(id, position) {
         const sequence: SequenceFlow = this.sequences[id];
@@ -64,9 +67,9 @@ export class BpmnElements {
         element.waypoints.push(waypoints);
     }
     setShapeAttributes(id: string, width: number, height: number, position: any): void {
-        const shape:Shape = this.shapes[ id ];
+        const shape:BpmnElement = this.elements[ id ];
         if ( !shape ) {
-            console.warn( 'Shape not found: ' + id );
+            console.warn( 'BpmnElement not found: ' + id );
             return;
         }
 
@@ -93,10 +96,10 @@ export class BpmnElements {
         }
     }
     setShapeNamePlacement(id: string, position) : void {
-        let shape: Shape = this.shapes[id];
+        let shape: BpmnElement = this.elements[id];
 
         if (!shape) {
-            console.warn('Shape not found: ' + id);
+            console.warn('BpmnElement not found: ' + id);
             return;
         }
 

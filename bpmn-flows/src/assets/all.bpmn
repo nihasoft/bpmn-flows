@@ -33,24 +33,35 @@
         <bpmn:flowNodeRef>Task_1gadpwu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0uloe5g</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>fight</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>SubProcess_0h7uuq5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1u9k8ol</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_08ra862</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>SubProcess_0qfwq7w</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SubProcess_0h7uuq5</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>SubProcess_1jxbmuz</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_16smi7w</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_0qrogz3</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_1tbj9do</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>BoundaryEvent_1s3kcu7</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_1aq06v3</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_1dog695</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_1cgj8ke</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_0kkb3le</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_0wuy1ok</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_1g28wj3</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_171tpnu</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_0ayxyen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BoundaryEvent_0milnbf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_1tbj9do</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_0qrogz3</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>BoundaryEvent_03fm15k</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_0milnbf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_0ayxyen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_171tpnu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_1g28wj3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_0wuy1ok</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_0kkb3le</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_1cgj8ke</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_1dog695</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_1aq06v3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_16smi7w</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0zhpamv</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1c2b7an</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1xzmljf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_08xqi77</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0vrxu1l</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1dk825s</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0qig1wv</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0goxp5d</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0b08xyq</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1so8p49</bpmn:flowNodeRef>
         <bpmn:childLaneSet id="LaneSet_01fyfu1">
           <bpmn:lane id="Lane_1q0eyxe" name="">
             <bpmn:flowNodeRef>masters</bpmn:flowNodeRef>
@@ -80,24 +91,35 @@
             <bpmn:flowNodeRef>Task_1gadpwu</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>ExclusiveGateway_0uloe5g</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>fight</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>SubProcess_0h7uuq5</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Task_1u9k8ol</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>Task_08ra862</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>SubProcess_0qfwq7w</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>SubProcess_0h7uuq5</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>SubProcess_1jxbmuz</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_16smi7w</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_0qrogz3</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_1tbj9do</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>BoundaryEvent_1s3kcu7</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_1aq06v3</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_1dog695</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_1cgj8ke</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_0kkb3le</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_0wuy1ok</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_1g28wj3</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_171tpnu</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_0ayxyen</bpmn:flowNodeRef>
-            <bpmn:flowNodeRef>BoundaryEvent_0milnbf</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_1tbj9do</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_0qrogz3</bpmn:flowNodeRef>
             <bpmn:flowNodeRef>BoundaryEvent_03fm15k</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_0milnbf</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_0ayxyen</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_171tpnu</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_1g28wj3</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_0wuy1ok</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_0kkb3le</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_1cgj8ke</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_1dog695</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_1aq06v3</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>BoundaryEvent_16smi7w</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Task_0zhpamv</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Task_1c2b7an</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Task_1xzmljf</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Task_08xqi77</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Task_0vrxu1l</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Task_1dk825s</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Task_0qig1wv</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Task_0goxp5d</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Task_0b08xyq</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>Task_1so8p49</bpmn:flowNodeRef>
           </bpmn:lane>
         </bpmn:childLaneSet>
       </bpmn:lane>
@@ -213,6 +235,7 @@
     <bpmn:businessRuleTask id="Task_1qibpa2">
       <bpmn:incoming>SequenceFlow_1grbmac</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_11rumfx</bpmn:outgoing>
+      <bpmn:standardLoopCharacteristics />
     </bpmn:businessRuleTask>
     <bpmn:inclusiveGateway id="ExclusiveGateway_1cc269b">
       <bpmn:incoming>SequenceFlow_11rumfx</bpmn:incoming>
@@ -255,21 +278,6 @@
     <bpmn:task id="Task_1gadpwu">
       <bpmn:multiInstanceLoopCharacteristics isSequential="true" />
     </bpmn:task>
-    <bpmn:subProcess id="SubProcess_0h7uuq5" name="Childrens">
-      <bpmn:incoming>SequenceFlow_0u69k35</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_123sfeg</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${agendarVistoriaTarefaCamundaService.pedidosUbsParaVistoria(execution)}" camunda:elementVariable="pedidoUbsId" />
-      <bpmn:startEvent id="childrens01">
-        <bpmn:outgoing>SequenceFlow_0x9fo7t</bpmn:outgoing>
-      </bpmn:startEvent>
-      <bpmn:userTask id="child1" name="Child" camunda:formKey="child1" camunda:candidateUsers="admin" camunda:candidateGroups="ROLE_GESTOR_LOGISTICO">
-        <bpmn:extensionElements>
-          <camunda:taskListener delegateExpression="${vistoriaTarefaCriaService}" event="create" />
-        </bpmn:extensionElements>
-        <bpmn:incoming>SequenceFlow_0x9fo7t</bpmn:incoming>
-      </bpmn:userTask>
-      <bpmn:sequenceFlow id="SequenceFlow_0x9fo7t" sourceRef="childrens01" targetRef="child1" />
-    </bpmn:subProcess>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0uloe5g">
       <bpmn:incoming>SequenceFlow_0dnakcp</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_0b0epv0</bpmn:incoming>
@@ -350,10 +358,6 @@
       </bpmn:endEvent>
     </bpmn:adHocSubProcess>
     <bpmn:transaction id="SubProcess_0qfwq7w" />
-    <bpmn:subProcess id="SubProcess_1jxbmuz" triggeredByEvent="true" />
-    <bpmn:boundaryEvent id="BoundaryEvent_16smi7w" name="Event email" cancelActivity="false" attachedToRef="SubProcess_0h7uuq5">
-      <bpmn:messageEventDefinition />
-    </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="BoundaryEvent_03rzozq" name="Alone Signal" attachedToRef="childrens001">
       <bpmn:signalEventDefinition />
     </bpmn:boundaryEvent>
@@ -365,40 +369,6 @@
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="BoundaryEvent_1s3kcu7" cancelActivity="false" attachedToRef="fight">
       <bpmn:timerEventDefinition />
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="BoundaryEvent_1aq06v3" cancelActivity="false" attachedToRef="SubProcess_0h7uuq5">
-      <bpmn:escalationEventDefinition />
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="BoundaryEvent_1dog695" cancelActivity="false" attachedToRef="SubProcess_0h7uuq5">
-      <bpmn:conditionalEventDefinition>
-        <bpmn:condition xsi:type="bpmn:tFormalExpression" />
-      </bpmn:conditionalEventDefinition>
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="BoundaryEvent_1cgj8ke" cancelActivity="false" attachedToRef="SubProcess_0h7uuq5">
-      <bpmn:signalEventDefinition />
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="BoundaryEvent_0kkb3le" attachedToRef="SubProcess_0h7uuq5">
-      <bpmn:compensateEventDefinition />
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="BoundaryEvent_0wuy1ok" attachedToRef="SubProcess_0h7uuq5">
-      <bpmn:signalEventDefinition />
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="BoundaryEvent_1g28wj3" attachedToRef="SubProcess_0h7uuq5">
-      <bpmn:errorEventDefinition />
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="BoundaryEvent_171tpnu" attachedToRef="SubProcess_0h7uuq5">
-      <bpmn:conditionalEventDefinition>
-        <bpmn:condition xsi:type="bpmn:tFormalExpression" />
-      </bpmn:conditionalEventDefinition>
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="BoundaryEvent_0ayxyen" attachedToRef="SubProcess_0h7uuq5">
-      <bpmn:escalationEventDefinition />
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="BoundaryEvent_0milnbf" attachedToRef="SubProcess_0h7uuq5">
-      <bpmn:timerEventDefinition />
-    </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="BoundaryEvent_03fm15k" attachedToRef="SubProcess_0h7uuq5">
-      <bpmn:messageEventDefinition />
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0is01kh" name="Meet someone or marry" sourceRef="ExclusiveGateway_1otuu3r" targetRef="Task_04ftbit" />
     <bpmn:sequenceFlow id="SequenceFlow_1f4otya" name="is alive?" sourceRef="ExclusiveGateway_1town7o" targetRef="Task_08ra862" />
@@ -427,6 +397,93 @@
     <bpmn:sequenceFlow id="SequenceFlow_0b0epv0" sourceRef="Task_08ra862" targetRef="ExclusiveGateway_0uloe5g" />
     <bpmn:sequenceFlow id="SequenceFlow_1grbmac" sourceRef="StartEvent_0ta9sc4" targetRef="Task_1qibpa2" />
     <bpmn:sequenceFlow id="SequenceFlow_11rumfx" sourceRef="Task_1qibpa2" targetRef="ExclusiveGateway_1cc269b" />
+    <bpmn:adHocSubProcess id="SubProcess_0h7uuq5" name="Childrens">
+      <bpmn:incoming>SequenceFlow_0u69k35</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_123sfeg</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics />
+      <bpmn:startEvent id="childrens01">
+        <bpmn:outgoing>SequenceFlow_0x9fo7t</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:userTask id="child1" name="Child">
+        <bpmn:extensionElements>
+          <!-- <camunda:taskListener delegateExpression="${vistoriaTarefaCriaService}" event="create" /> -->
+        </bpmn:extensionElements>
+        <bpmn:incoming>SequenceFlow_0x9fo7t</bpmn:incoming>
+        <bpmn:multiInstanceLoopCharacteristics isSequential="true" />
+      </bpmn:userTask>
+      <bpmn:sequenceFlow id="SequenceFlow_0x9fo7t" sourceRef="childrens01" targetRef="child1" />
+    </bpmn:adHocSubProcess>
+    <bpmn:boundaryEvent id="BoundaryEvent_03fm15k" attachedToRef="SubProcess_0h7uuq5">
+      <bpmn:messageEventDefinition />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_0milnbf" attachedToRef="SubProcess_0h7uuq5">
+      <bpmn:timerEventDefinition />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_0ayxyen" attachedToRef="SubProcess_0h7uuq5">
+      <bpmn:escalationEventDefinition />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_171tpnu" attachedToRef="SubProcess_0h7uuq5">
+      <bpmn:conditionalEventDefinition>
+        <bpmn:condition xsi:type="bpmn:tFormalExpression" />
+      </bpmn:conditionalEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_1g28wj3" attachedToRef="SubProcess_0h7uuq5">
+      <bpmn:errorEventDefinition />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_0wuy1ok" attachedToRef="SubProcess_0h7uuq5">
+      <bpmn:signalEventDefinition />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_0kkb3le" attachedToRef="SubProcess_0h7uuq5">
+      <bpmn:compensateEventDefinition />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_1cgj8ke" cancelActivity="false" attachedToRef="SubProcess_0h7uuq5">
+      <bpmn:signalEventDefinition />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_1dog695" cancelActivity="false" attachedToRef="SubProcess_0h7uuq5">
+      <bpmn:conditionalEventDefinition>
+        <bpmn:condition xsi:type="bpmn:tFormalExpression" />
+      </bpmn:conditionalEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_1aq06v3" cancelActivity="false" attachedToRef="SubProcess_0h7uuq5">
+      <bpmn:escalationEventDefinition />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_16smi7w" name="Event email" cancelActivity="false" attachedToRef="SubProcess_0h7uuq5">
+      <bpmn:messageEventDefinition />
+    </bpmn:boundaryEvent>
+    <bpmn:subProcess id="SubProcess_1jxbmuz" triggeredByEvent="true" />
+    <bpmn:serviceTask id="Task_1u9k8ol">
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true" />
+    </bpmn:serviceTask>
+    <bpmn:callActivity id="Task_0zhpamv">
+      <bpmn:standardLoopCharacteristics />
+    </bpmn:callActivity>
+    <bpmn:userTask id="Task_1c2b7an">
+      <bpmn:standardLoopCharacteristics />
+    </bpmn:userTask>
+    <bpmn:task id="Task_1xzmljf">
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true" />
+    </bpmn:task>
+    <bpmn:adHocSubProcess id="Task_08xqi77">
+      <bpmn:standardLoopCharacteristics />
+    </bpmn:adHocSubProcess>
+    <bpmn:adHocSubProcess id="Task_0vrxu1l">
+      <bpmn:multiInstanceLoopCharacteristics />
+    </bpmn:adHocSubProcess>
+    <bpmn:adHocSubProcess id="Task_1dk825s">
+      <bpmn:multiInstanceLoopCharacteristics />
+    </bpmn:adHocSubProcess>
+    <bpmn:adHocSubProcess id="Task_0qig1wv">
+      <bpmn:standardLoopCharacteristics />
+    </bpmn:adHocSubProcess>
+    <bpmn:subProcess id="Task_0goxp5d">
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true" />
+    </bpmn:subProcess>
+    <bpmn:subProcess id="Task_0b08xyq">
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true" />
+    </bpmn:subProcess>
+    <bpmn:subProcess id="Task_1so8p49">
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true" />
+    </bpmn:subProcess>
     <bpmn:textAnnotation id="TextAnnotation_0u1zprn">
       <bpmn:text>adsd</bpmn:text>
     </bpmn:textAnnotation>
@@ -439,10 +496,7 @@
   <bpmndi:BPMNDiagram id="Diagram-_1" name="New Diagram" documentation="background=#FFFFFF;count=1;horizontalcount=3;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0">
     <bpmndi:BPMNPlane bpmnElement="Collaboration_14yx5yo">
       <bpmndi:BPMNShape id="Participant_0ztz3f5_di" bpmnElement="Participant_0ztz3f5" isHorizontal="true">
-        <dc:Bounds x="156" y="81" width="2174" height="1311" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubProcess_0h7uuq5_di" bpmnElement="SubProcess_0h7uuq5" isExpanded="true">
-        <dc:Bounds x="685" y="650" width="371" height="175" />
+        <dc:Bounds x="156" y="81" width="2533" height="1490" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_0uxjo2w_di" bpmnElement="childrens01">
         <dc:Bounds x="713" y="720" width="36" height="36" />
@@ -500,13 +554,13 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Lane_1hjrisd_di" bpmnElement="Lane_1hjrisd" isHorizontal="true">
-        <dc:Bounds x="186" y="81" width="2144" height="303" />
+        <dc:Bounds x="186" y="81" width="2503" height="303" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_0ia3y1e_di" bpmnElement="Lane_0ia3y1e" isHorizontal="true">
-        <dc:Bounds x="186" y="384" width="2144" height="1008" />
+        <dc:Bounds x="186" y="384" width="2503" height="1187" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_1q0eyxe_di" bpmnElement="Lane_1q0eyxe" isHorizontal="true">
-        <dc:Bounds x="216" y="384" width="2114" height="1008" />
+        <dc:Bounds x="216" y="384" width="2473" height="1187" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ManualTask_0pbi0ek_di" bpmnElement="Task_03co4ew">
         <dc:Bounds x="821" y="168" width="100" height="80" />
@@ -816,7 +870,7 @@
         <dc:Bounds x="794" y="1133" width="350" height="200" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SubProcess_0w6tjv8_di" bpmnElement="SubProcess_1jxbmuz" isExpanded="true">
-        <dc:Bounds x="1183" y="1133" width="350" height="200" />
+        <dc:Bounds x="1199" y="1078" width="350" height="200" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="IntermediateThrowEvent_0j76s75_di" bpmnElement="IntermediateThrowEvent_0byu88j">
         <dc:Bounds x="690" y="902" width="36" height="36" />
@@ -899,6 +953,42 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_1gadpwu_di" bpmnElement="Task_1gadpwu">
         <dc:Bounds x="335" y="561" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="AdHocSubProcess_1vo8vtm_di" bpmnElement="SubProcess_0h7uuq5" isExpanded="true">
+        <dc:Bounds x="685" y="650" width="371" height="175" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="AdHocSubProcess_0umptdw_di" bpmnElement="Task_08xqi77" isExpanded="true">
+        <dc:Bounds x="1140" y="1338" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="AdHocSubProcess_1a89fvp_di" bpmnElement="Task_1dk825s" isExpanded="true">
+        <dc:Bounds x="1905" y="1330" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="AdHocSubProcess_1jc9ofu_di" bpmnElement="Task_0vrxu1l" isExpanded="true">
+        <dc:Bounds x="1527" y="1330" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1q7go34_di" bpmnElement="Task_1u9k8ol">
+        <dc:Bounds x="400" y="1431" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CallActivity_1v73bmo_di" bpmnElement="Task_0zhpamv">
+        <dc:Bounds x="582" y="1431" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_03vhefw_di" bpmnElement="Task_1c2b7an">
+        <dc:Bounds x="722" y="1431" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1xzmljf_di" bpmnElement="Task_1xzmljf">
+        <dc:Bounds x="866" y="1431" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="AdHocSubProcess_0jpjzcq_di" bpmnElement="Task_0qig1wv">
+        <dc:Bounds x="2305" y="1390" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_1ttjluk_di" bpmnElement="Task_0b08xyq">
+        <dc:Bounds x="1953" y="1193" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_07m26sk_di" bpmnElement="Task_0goxp5d" isExpanded="true">
+        <dc:Bounds x="2246" y="1078" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_1oloruy_di" bpmnElement="Task_1so8p49">
+        <dc:Bounds x="2325" y="950" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

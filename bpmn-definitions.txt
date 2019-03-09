@@ -2,3 +2,9 @@ LaneSet - The LaneSet is a group of lanes. The laneset is only present in the .b
  IS NOT A DIAGRAM OBJECT;
 ChildLaneSet - Is a LaneSet inside a lane. IS NOT A DIAGRAM OBJECT;
 Participant - Is a Pool of lanes. This is a digram object.
+<bpmn:transaction id="SubProcess_0qfwq7w" /> - Stroke width + 2;
+<bpmn:subProcess id="SubProcess_1jxbmuz" triggeredByEvent="true" /> - Stroke dasharray: 1,2
+
+adHocSubProcess some of normal process
+
+<bpmn:extensionElements> - When the "custom" things should stay

@@ -1,6 +1,6 @@
 import { PrimitiveCircle } from '../elements/shape/primitive.circle';
 import { PrimitiveRect } from '../elements/shape/primitive.rect';
-import { Shape } from '../elements/shape/shape.model';
+import { BpmnElement } from '../elements/shape/shape.model';
 import { SequenceFlow } from '../elements/sequence/sequence.flow.model';
 import { BehaviorSubject } from 'rxjs';
 import { BpmnElements } from '../elements/bpmn.elements';
@@ -20,7 +20,7 @@ export class Scene {
     private zoomBehaviour: any;
     private zoomEye: any;
     
-    private shapes;
+    private elements;
     private sequences;
     private svgScene = null;
     private svgSceneElements = null;
@@ -29,7 +29,7 @@ export class Scene {
     private svgSceneDefs = null;
     constructor( private bpmnElements: BpmnElements, private sceneClass: string) {
         this.sequences = this.bpmnElements.sequences;
-        this.shapes = this.bpmnElements.shapes;
+        this.elements = this.bpmnElements.elements;
      }
     init() {
         this.loadSceneEngine();
@@ -93,9 +93,9 @@ export class Scene {
         this.loadSequences();
     }
     private loadShapes() {
-        const shapesKeys = Object.keys(this.shapes);
+        const shapesKeys = Object.keys(this.elements);
         for (let shapesKey of shapesKeys) {
-            let shape: Shape = this.shapes[shapesKey];
+            let shape: BpmnElement = this.elements[shapesKey];
             shape.element.svgElement = this.svgSceneShapes.append('g');
             if (shape.element instanceof PrimitiveCircle) {
                 this.renderCircle(shape, shape.element);
@@ -123,7 +123,7 @@ export class Scene {
             this.renderSequence(sequence);
         }
     }
-    private renderCircle( shape: Shape, element: PrimitiveCircle) {
+    private renderCircle( shape: BpmnElement, element: PrimitiveCircle) {
         let name = shape.name;
         let circle = element.svgElement.append('circle');
         let foreignObject = element.svgElement.append('foreignObject').attr('y', 0).attr('x', 0)
@@ -149,7 +149,7 @@ export class Scene {
         element.svgElement.attr('transform', 'translate( '+ element.position.x +', '+ element.position.y +' )')
         this.setCenterEye(element.position, element.width, element.height);
     }
-    private renderRect( shape: Shape, element: PrimitiveRect ) {
+    private renderRect( shape: BpmnElement, element: PrimitiveRect ) {
         let rec = element.svgElement.append('rect');
 
         rec.attr('id', shape.id);
@@ -168,7 +168,7 @@ export class Scene {
         element.svgElement.attr('transform', 'translate( '+ element.position.x +', '+ element.position.y +' )');
         this.setCenterEye(element.position, element.width, element.height);
     }
-    private renderRhombus(shape: Shape, element: PrimitiveRhombus) {
+    private renderRhombus(shape: BpmnElement, element: PrimitiveRhombus) {
         let polygon = element.svgElement.append('polygon');
         let foreignObject = element.svgElement.append('foreignObject').attr('y', 0).attr('x', 0);
         let div = foreignObject.append('xhtml:div')
@@ -211,14 +211,14 @@ export class Scene {
         }
     }
 
-    private renderLane(shape: Shape, element: PrimitiveRect) {
+    private renderLane(shape: BpmnElement, element: PrimitiveRect) {
         let text = element.svgElement.append('text');
         text.attr('class', element.textCssClass);
         text.attr('x', -element.height /2);
         text.attr('y', 15);
         text.text(shape.name);
     }
-    private renderSubProcess(shape: Shape, element: PrimitiveRect) {
+    private renderSubProcess(shape: BpmnElement, element: PrimitiveRect) {
         let name = shape.name;
         if (name) {
             let text = element.svgElement.append('text');
@@ -229,7 +229,7 @@ export class Scene {
             text.attr('x', element.width/2);
         }
     }
-    private renderTask(shape: Shape, element: PrimitiveRect) {
+    private renderTask(shape: BpmnElement, element: PrimitiveRect) {
         let taskName = shape.name;
 
         if (element.icon) {
@@ -272,8 +272,8 @@ export class Scene {
         }  
     }
 
-    private zoomed( transform, shapes ) {
-        shapes.attr('transform', transform);
+    private zoomed( transform, elements ) {
+        elements.attr('transform', transform);
     }
     private zoomEngine() {
         

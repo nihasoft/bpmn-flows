@@ -13,22 +13,32 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma'),
       require('karma-scss-preprocessor')
     ],
-    basePath: './src',
+    basePath: '.',
     files: [
       {
-        pattern: './assets/**', watched: true, included: false, nocache: false, served: true
+        pattern: './src/assets/**', watched: true, included: false, nocache: false, served: true
       },{ 
-        pattern: './lib/bpmn-flows.variables.scss', watched: true,  included: true, served: true
+        pattern: './src/lib/bpmn-flows.variables.scss', watched: true,  included: true, served: true
       }, {
-        pattern: './lib/bpmn-flows.component.scss', watched: true,  included: true, served: true
+        pattern: './src/lib/bpmn-flows.component.scss', watched: true,  included: true, served: true
+      }, {
+        pattern: './src/lib/bpmn-flows.spec.scss', watched: true,  included: true, served: true
+      }, {
+        pattern: './node_modules/@fortawesome/fontawesome-free/css/fontawesome.css', watched: true,  included: true, served: true
+      }, {
+        pattern: './node_modules/@fortawesome/fontawesome-free/css/solid.css', watched: true,  included: true, served: true
+      }, {
+        pattern: './node_modules/@fortawesome/fontawesome-free/webfonts/**', watched: false, nocache: false, included: false, served: true
       }
     ],    
     preprocessors: {
-      './lib/bpmn-flows.variables.scss': ['scss'],
-      './lib/bpmn-flows.component.scss': ['scss']
+      './src/lib/bpmn-flows.variables.scss': ['scss'],
+      './src/lib/bpmn-flows.component.scss': ['scss'],
+      './src/lib/bpmn-flows.spec.scss': ['scss']
     },
     proxies: {
-      '/assets/': '/base/assets/'
+      '/assets/': '/base/src/assets/',
+      '/node_modules/': '/base/node_modules/'
     },
     client: {
       clearContext: false

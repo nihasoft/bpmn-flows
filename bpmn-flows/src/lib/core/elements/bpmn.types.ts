@@ -10,9 +10,18 @@ import { ScriptTaskRect } from './shape/script.task.rect';
 import { LaneRect } from './shape/lane.rect';
 import { ParticipantRect } from './shape/participant.rect';
 import { BusinessRuleTaskRect } from './shape/business.rule.task.rect';
-import { IntermediateEventCircle } from './shape/intermediate.event.circle';
+import { IntermediateCatchEventCircle } from './shape/intermediate-catch.event.circle';
+import { IntermediateThrowEventCircle } from './shape/intermediate-throw.event.circle';
 import { ServiceTaskRect } from './shape/service.task.rect';
 import { PrimitiveRect } from './shape/primitive.rect';
+import { CallActivityTaskRect } from './shape/call.activity.task.rect';
+import { InclusiveGatewayRhombus } from './shape/inclusive.gateway.rhombus';
+import { EventBasedGatewayRhombus } from './shape/event.based.gateway.rhombus';
+import { ComplexGatewayRhombus } from './shape/complex.gateway.rhombus';
+import { ReceiveTaskRect } from './shape/receive.task.rect';
+import { SendTaskRect } from './shape/sent.task.rect';
+import { BoundaryEventCircle } from './shape/boundary.event.circle';
+import { TransactionSubProccessRect } from './shape/transaction.subproccess.rect';
 
 export const BpmnTypes = {
     'userTask': UserTaskRect,
@@ -28,7 +37,16 @@ export const BpmnTypes = {
     'lane': LaneRect,
     'participant': ParticipantRect,
     'businessRuleTask': BusinessRuleTaskRect,
-    'intermediateThrowEvent': IntermediateEventCircle,
+    'intermediateThrowEvent': IntermediateThrowEventCircle,
+    'intermediateCatchEvent': IntermediateThrowEventCircle,
     'serviceTask': ServiceTaskRect,
-    'task': PrimitiveRect
+    'task': PrimitiveRect,
+    'callActivity': CallActivityTaskRect,
+    'inclusiveGateway': InclusiveGatewayRhombus,
+    'eventBasedGateway': EventBasedGatewayRhombus,
+    'complexGateway': ComplexGatewayRhombus,
+    'receiveTask': ReceiveTaskRect,
+    'sendTask': SendTaskRect,
+    'boundaryEvent': BoundaryEventCircle,
+    'transaction': TransactionSubProccessRect
 }

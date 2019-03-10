@@ -9,13 +9,11 @@
     overflow-x: hidden;
     overflow-y: hidden;
 }
-
 .bpmn-flows-svg-scene {
     height: 5000px;
     width: 5000px;
     position: relative;
 }
-
 .bpmn-flows-rect, .bpmn-flows-gateway {
     fill: none;
     stroke: $bpmn-flows-rect-color;
@@ -80,4 +78,10 @@
 
 .bpmn-flows-icon {
     font-family: 'Font Awesome 5 Free';
+}
+
+.bpmn-flows-call-activity-task-rect {
+    stroke-width: 3px;
+    fill: none;
+    stroke: $bpmn-flows-rect-color;
 }

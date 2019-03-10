@@ -59,15 +59,19 @@ export class BpmnImporter {
             // Todo get the childs that isn't incoming or outcoming because the child can be a condition
             let childs = this.htmlCollectionToArray(dom.children);
             for (let child of childs) {
-                let childType = child.tagName.split(':')[1];
-                if (childType === 'standardLoopCharacteristics') {
-                    bpmnDocumentElement.data.multiple = 'repeat';
-                } else if (childType === 'multiInstanceLoopCharacteristics') {
-                    if (child.getAttribute('isSequential')) {
-                        bpmnDocumentElement.data.multiple = 'multipleSequence';
-                    } else {
-                        bpmnDocumentElement.data.multiple = 'multiple';
+                if (type.includes('process')) {
+                    this.proccessSubProccessChild(child, bpmnDocumentElement);
+                    if (dom.getAttribute('triggeredByEvent=')) {
+                        bpmnDocumentElement.data.triggered = this.isSubProccessTriggered(dom);
                     }
+                } else if (type.includes('startEvent')) {
+                    this.proccessStartEventChild(child, bpmnDocumentElement);
+                } else if (type.includes('intermediateThrowEvent')) {
+                    this.proccessIntermediateThrowEvent(child, bpmnDocumentElement);
+                } else if (type.includes('intermediateCatchEvent')) {
+                    this.proccessIntermediateCatchEvent(child, bpmnDocumentElement);
+                } else if (type.includes('boundaryEvent')) {
+                    this.proccessBoundaryEvent(child, bpmnDocumentElement);
                 }
             }
 
@@ -81,6 +85,64 @@ export class BpmnImporter {
         } catch ( ex ) {
             console.warn(dom);
             console.warn('Shape has not a known type: ' + type);
+        }
+    }
+    private isSubProccessTriggered(dom: HTMLElement): boolean {
+        return (dom.getAttribute('triggeredByEvent=') && dom.getAttribute('triggeredByEvent=') === 'true') ? true : false;
+    }
+    private proccessBoundaryEvent(child: HTMLElement, bpmnDocumentElement: any): void {
+        let childType = child.tagName.split(':')[1];
+        if (childType === 'escalationEventDefinition') {
+            bpmnDocumentElement.data.event = 'escalation';
+        } else if (childType === 'conditionalEventDefinition') {
+            bpmnDocumentElement.data.event = 'conditional';
+            bpmnDocumentElement.data.condition = child.getElementsByTagName('bpmn:condition');
+        } else if (childType === 'messageEventDefinition') {
+            bpmnDocumentElement.data.event = 'message';   
+        } else if (childType === 'timerEventDefinition') {
+            bpmnDocumentElement.data.event = 'timer';
+        } else if (childType === 'scalationEventDefinition') {
+            bpmnDocumentElement.data.event = 'scalation';
+        } else if (childType === 'errorEventDefinition') {
+            bpmnDocumentElement.data.event = 'error';
+        } else if (childType === 'signalEventDefinition') {
+            bpmnDocumentElement.data.event = 'signal';
+        } else if (childType === 'compensateEventDefinition') {
+            bpmnDocumentElement.data.event = 'compensate';
+        }
+    }
+    private proccessIntermediateCatchEvent(child: HTMLElement, bpmnDocumentElement: any): void {
+        let childType = child.tagName.split(':')[1];
+        if (childType === 'timerEventDefinition') {
+            bpmnDocumentElement.data.event = 'timer';
+        } else if (childType === 'messageEventDefinition') {
+            bpmnDocumentElement.data.event = 'message';
+        } else if (childType === 'signalEventDefinition') {
+            bpmnDocumentElement.data.event = 'signal';
+        }
+    }
+    private proccessIntermediateThrowEvent(child: HTMLElement, bpmnDocumentElement: any): void {
+        let childType = child.tagName.split(':')[1];
+        if (childType === 'linkEventDefinition') {
+            bpmnDocumentElement.data.event = 'link';
+        }
+    }
+    private proccessStartEventChild(child: HTMLElement, bpmnDocumentElement: any): void {
+        let childType = child.tagName.split(':')[1];
+        if (childType === 'signalEventDefinition') {
+            bpmnDocumentElement.data.event = 'signal';
+        }
+    }
+    private proccessSubProccessChild(child: HTMLElement, bpmnDocumentElement: any): void {
+        let childType = child.tagName.split(':')[1];
+        if (childType === 'standardLoopCharacteristics') {
+            bpmnDocumentElement.data.multiple = 'repeat';
+        } else if (childType === 'multiInstanceLoopCharacteristics') {
+            if (child.getAttribute('isSequential')) {
+                bpmnDocumentElement.data.multiple = 'multipleSequence';
+            } else {
+                bpmnDocumentElement.data.multiple = 'multiple';
+            }
         }
     }
     private createSubProcess(dom: any, type: string, father: any): BpmnElement {
@@ -218,6 +280,9 @@ export class BpmnImporter {
         
         let bpmnElement: BpmnElement = this.bpmnElements.getBpmnElementById(id);
         if (bpmnElement) {
+            if (bpmnElement.type.search('process') > -1) {
+                bpmnElement.data.expanded = (child.getAttribute('isExpanded') ? child.getAttribute('isExpanded') : false);
+            }
             childNodes.forEach(( node ) => {
                 this.processShapeChild(id, node);
             })

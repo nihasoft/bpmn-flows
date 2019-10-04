@@ -71,6 +71,11 @@ This lib load a bpmn 2.0 file and render the workflow. To use this lib you need 
 
 And that's is it.
 
+## Donate
+
+Paypal - https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=96LEHU7G2Z2MC
+Bitcoin Wallet - 3ADj1SFkgca5CVjdiWF64B83eG7uPRWSFH
+
 ## Enjoy.
 
 ## License

@@ -1,6 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
 import { BpmnElements } from '../elements/bpmn.elements';
-import { MultiInstanceRect } from '../elements/shape/multi.instance.rect';
 import { Shape } from '../elements/shape/shape.model';
 import { LaneRect } from '../elements/shape/lane.rect';
 

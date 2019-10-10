@@ -44,22 +44,31 @@ module.exports = function (config) {
       clearContext: false
     },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, '../../coverage'),
-      reports: ['html', 'lcovonly'],
-      fixWebpackSourcePaths: true
+        dir: require('path').join(__dirname, '../coverage'),
+        reports: ['html', 'lcovonly'],
+        fixWebpackSourcePaths: true,
+        thresholds: {
+            emitWarning: false,
+            global: {
+                statements: 20,
+                lines: 20,
+                branches: 10,
+                functions: 20
+            }
+        }   
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: [
-      'ChromeNoSandbox'
-    ],
+    browsers: ['Chrome', 'CustomChromeHeadless'],
     customLaunchers: {
-      ChromeNoSandbox: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
+      CustomChromeHeadless: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--no-sandbox'
+        ]
       }
     }
   });

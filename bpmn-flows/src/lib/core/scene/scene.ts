@@ -11,15 +11,17 @@ import { SubProcessRect } from '../elements/shape/sub.process.rect';
 import { ParticipantRect } from '../elements/shape/participant.rect';
 import { LaneRect } from '../elements/shape/lane.rect';
 import { SequenceFlowPath } from '../elements/sequence/sequence.flow.path';
+import { IntermediateThrowEventCircle } from '../elements/shape/intermediate-throw.event.circle';
+import { BoundaryEventCircle } from '../elements/shape/boundary.event.circle';
 
 export class Scene {
 
     private centerEye: any = {};
-    loaded$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    public loaded$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     private zoomBehaviour: any;
     private zoomEye: any;
-    
+
     private elements;
     private sequences;
     private svgScene = null;
@@ -27,51 +29,67 @@ export class Scene {
     private svgSceneShapes = null;
     private svgSceneSequences = null;
     private svgSceneDefs = null;
+
     constructor( private bpmnElements: BpmnElements, private sceneClass: string) {
         this.sequences = this.bpmnElements.sequences;
         this.elements = this.bpmnElements.elements;
-     }
-    init() {
+    }
+
+    public init() {
         this.loadSceneEngine();
         this.loadElements();
         this.calculateCenterEye();
         this.loaded$.next( true );
     }
     private calculateCenterEye() {
-        let bpmnFlowsContainer = document.getElementsByClassName(this.sceneClass)[0];
-        let bpmnWidth = Math.abs(this.centerEye.maxX - this.centerEye.minX);
-        let bpmnHeight = Math.abs(this.centerEye.maxY - this.centerEye.minY);
-        let translateXFix = (this.centerEye.minX < 0) ? this.centerEye.minX * -1 : 0;
-        let translateYFix = (this.centerEye.minY < 0) ? this.centerEye.minY * -1 : 0;
+        const bpmnFlowsContainer = document.getElementsByClassName(this.sceneClass)[0];
+        const bpmnWidth = Math.abs(this.centerEye.maxX - this.centerEye.minX);
+        const bpmnHeight = Math.abs(this.centerEye.maxY - this.centerEye.minY);
+        const translateXFix = (this.centerEye.minX < 0) ? this.centerEye.minX * -1 : 0;
+        const translateYFix = (this.centerEye.minY < 0) ? this.centerEye.minY * -1 : 0;
 
-        let width = bpmnFlowsContainer.clientWidth;
-        let height = bpmnFlowsContainer.clientHeight;
+        const width = bpmnFlowsContainer.clientWidth;
+        const height = bpmnFlowsContainer.clientHeight;
         let scale = 1;
-        
 
-        while((bpmnWidth * scale) > width || (bpmnHeight * scale) > height) {
+        while ((bpmnWidth * scale) > width || (bpmnHeight * scale) > height) {
             scale -= 0.03;
         }
 
-        //todo Create a mechanism to center the bpmn2.0 in the mid of the screen.
-        let translateX = translateXFix + 20;
-        let translateY = translateYFix;
+        // Todo Create a mechanism to center the bpmn2.0 in the mid of the screen.
+        const translateX = translateXFix + 20;
+        const translateY = translateYFix;
 
-        let centeredZoom = d3.zoomIdentity.translate(translateX, translateY).scale(scale);
-        this.zoomEye.call(this.zoomBehaviour.transform, centeredZoom)
+        const centeredZoom = d3.zoomIdentity.translate(translateX, translateY).scale(scale);
+        this.zoomEye.call(this.zoomBehaviour.transform, centeredZoom);
     }
-    private calculatePath( sequence: SequenceFlow ) {
+    private calculatePath( sequence: SequenceFlow ): any {
         const waypoints = sequence.element.waypoints;
-        let d = 'm '+ waypoints[0].x +', '+ waypoints[0].y
-        for( let waypoint = 1; waypoint < waypoints.length; waypoint++ ) {
-            d += 'L'+ waypoints[ waypoint ].x +','+ waypoints[ waypoint ].y
+        let d = 'm ' + waypoints[0].x + ', ' + waypoints[0].y;
+        for ( let waypoint = 1; waypoint < waypoints.length; waypoint++ ) {
+            d += 'L' + waypoints[ waypoint ].x + ',' + waypoints[ waypoint ].y;
         }
         return d;
     }
-    private calculateTextposition(element: PrimitiveElement) {
-        let x = element.textPosition.x - element.position.x + 20;
-        let y = element.textPosition.y - element.position.y + 10;
+    private calculateTextPosition(element: PrimitiveElement): string {
+        const x = element.textPosition.x - element.position.x + 20;
+        const y = element.textPosition.y - element.position.y + 10;
         return x + ',' + y;
+    }
+    private createGroups(): void {
+        this.svgSceneElements = this.svgScene.append('g');
+        this.svgSceneDefs = this.svgSceneElements.append('g');
+        this.svgSceneShapes = this.svgSceneElements.append('g');
+        this.svgSceneSequences = this.svgSceneElements.append('g');
+    }
+    private createZoomEngine() {
+        this.zoomBehaviour = d3.zoom()
+        .scaleExtent([1 / 2, 4])
+        .on('zoom', () => this.zoomed( d3.event.transform, this.svgSceneElements ));
+
+        this.zoomEye = this.svgScene.append('rect');
+        this.zoomEye.attr('class', 'bpmn-flows-zoom-eye');
+        this.zoomEye.call( this.zoomBehaviour );
     }
     private loadDefs() {
         this.svgSceneDefs.append( 'defs' ).append( 'marker' )
@@ -85,7 +103,7 @@ export class Scene {
         .attr( 'viewBox', '0 0 22 22' )
         .append( 'path' )
             .attr( 'd', 'M 1 5 L 11 10 L 1 15 Z' )
-            .attr( 'class', 'bpmn-flows-marker' )
+            .attr( 'class', 'bpmn-flows-marker' );
     }
     private loadElements() {
         this.loadDefs();
@@ -94,12 +112,12 @@ export class Scene {
     }
     private loadShapes() {
         const shapesKeys = Object.keys(this.elements);
-        for (let shapesKey of shapesKeys) {
-            let shape: BpmnElement = this.elements[shapesKey];
+        for (const shapesKey of shapesKeys) {
+            const shape: BpmnElement = this.elements[shapesKey];
             shape.element.svgElement = this.svgSceneShapes.append('g');
             if (shape.element instanceof PrimitiveCircle) {
                 this.renderCircle(shape, shape.element);
-            } else if (shape.element instanceof PrimitiveRect) { 
+            } else if (shape.element instanceof PrimitiveRect) {
                 this.renderRect( shape, shape.element);
             } else if (shape.element instanceof PrimitiveRhombus) {
                 this.renderRhombus(shape, shape.element);
@@ -109,54 +127,70 @@ export class Scene {
     private loadSceneEngine() {
         this.svgScene = d3.select( '.' + this.sceneClass ).append( 'svg' );
         this.svgScene.attr('class', 'bpmn-flows-svg-scene');
-        this.svgSceneElements = this.svgScene.append( 'g' );
-        this.svgSceneDefs = this.svgSceneElements.append( 'g' );
-        this.svgSceneSequences = this.svgSceneElements.append( 'g' );
-        this.svgSceneShapes = this.svgSceneElements.append( 'g' );
-        this.zoomEngine();
+        this.createGroups();
+        this.createZoomEngine();
     }
     private loadSequences() {
         const sequencesKeys = Object.keys( this.sequences );
-        for( let sequenceKey of sequencesKeys ) {
-            let sequence : SequenceFlow =  this.sequences[ sequenceKey ];
+        for (const sequenceKey of sequencesKeys ) {
+            const sequence: SequenceFlow =  this.sequences[ sequenceKey ];
             sequence.element.svgElement = this.svgSceneSequences.append('g');
             this.renderSequence(sequence);
         }
     }
+    // Todo: Make the circles be a Path using D3.arc generator path
     private renderCircle( shape: BpmnElement, element: PrimitiveCircle) {
-        let name = shape.name;
-        let circle = element.svgElement.append('circle');
-        let foreignObject = element.svgElement.append('foreignObject').attr('y', 0).attr('x', 0)
-        let div = foreignObject.append('xhtml:div')
+        const name = shape.name;
+        const circle = element.svgElement.append('circle');
 
         circle.attr('cx', '16');
         circle.attr('cy', '16');
         circle.attr('r', element.ratio);
         circle.attr('class', element.cssClass );
-            
+
         if (name) {
-            let text = element.svgElement.append('text');
-            let translate = this.calculateTextposition(element);
+            const text = element.svgElement.append('text');
+            const translate = this.calculateTextPosition(element);
             text.attr('class', element.textCssClass);
-            text.attr('transform', 'translate('+ translate +')');
+            text.attr('transform', 'translate(' + translate + ')');
             text.text(name);
         }
 
-        foreignObject.attr('style', 'width: '+ (element.width) +'px; height:'+ (element.height) +'px;')
-        div.attr('style', 'float:left; width: '+ (element.width) +'px; height:'+ (element.height) +'px;')
-        div.attr('class', element.icon +' '+ element.iconCssClass);   
+        if (element instanceof BoundaryEventCircle || element instanceof IntermediateThrowEventCircle) {
+            const innerCircle = element.svgElement.append('circle');
+            innerCircle.attr('cx', '16');
+            innerCircle.attr('cy', '16');
+            innerCircle.attr('r', element.ratio - 2);
+            innerCircle.attr('class', element.cssClass );
+        }
 
-        element.svgElement.attr('transform', 'translate( '+ element.position.x +', '+ element.position.y +' )')
+        if (element.icon) {
+            const size = element.ratio * 2;
+            const foreignObject = element.svgElement.append('foreignObject')
+                .attr('style', 'width:' + size + 'px; height:' + size + 'px;')
+                .attr('y', -2)
+                .attr('x', -2);
+            const icon = element.icon;
+            let iconCssClass = '';
+
+            if (element.iconCssClass) {
+                iconCssClass = element.iconCssClass;
+            }
+            const div = foreignObject.append('xhtml:div').attr('class', iconCssClass);
+            div.append('xhtml:span').attr('class', icon);
+        }
+
+        element.svgElement.attr('transform', 'translate( ' + element.position.x + ', ' + element.position.y + ' )');
         this.setCenterEye(element.position, element.width, element.height);
     }
     private renderRect( shape: BpmnElement, element: PrimitiveRect ) {
-        let rec = element.svgElement.append('rect');
+        const rec = element.svgElement.append('rect');
 
         rec.attr('id', shape.id);
         rec.attr('width', element.width);
         rec.attr('height', element.height);
         rec.attr('class', element.cssClass );
-        
+
         if (element instanceof SubProcessRect) {
             this.renderSubProcess(shape, element);
         } else if (element instanceof ParticipantRect || element instanceof LaneRect) {
@@ -165,14 +199,14 @@ export class Scene {
             this.renderTask(shape, element);
         }
 
-        element.svgElement.attr('transform', 'translate( '+ element.position.x +', '+ element.position.y +' )');
+        element.svgElement.attr('transform', 'translate( ' + element.position.x + ', ' + element.position.y + ' )');
         this.setCenterEye(element.position, element.width, element.height);
     }
     private renderRhombus(shape: BpmnElement, element: PrimitiveRhombus) {
-        let polygon = element.svgElement.append('polygon');
-        let foreignObject = element.svgElement.append('foreignObject').attr('y', 0).attr('x', 0);
-        let div = foreignObject.append('xhtml:div')
-        let name = shape.name;
+        const polygon = element.svgElement.append('polygon');
+        const foreignObject = element.svgElement.append('foreignObject').attr('y', 0).attr('x', 0);
+        const div = foreignObject.append('xhtml:div');
+        const name = shape.name;
 
         polygon.attr('points', element.points);
         polygon.attr('width', element.width);
@@ -180,23 +214,23 @@ export class Scene {
         polygon.attr('class', element.cssClass );
 
         if (name) {
-            let text = element.svgElement.append('text');
-            let translate = this.calculateTextposition(element);
+            const text = element.svgElement.append('text');
+            const translate = this.calculateTextPosition(element);
             text.attr('class', element.textCssClass);
-            text.attr('transform', 'translate('+ translate +')');
+            text.attr('transform', 'translate(' + translate + ')');
             text.text(name);
         }
 
-        foreignObject.attr('style', 'width: '+ (element.width) +'px; height:'+ (element.height) +'px;')
-        div.attr('style', 'float:left; width: '+ (element.width) +'px; height:'+ (element.height) +'px;')
-        div.attr('class', element.icon +' '+ element.iconCssClass);       
+        foreignObject.attr('style', 'width: ' + (element.width) + 'px; height:' + (element.height) + 'px;');
+        div.attr('style', 'float:left; width: ' + (element.width) + 'px; height:' + (element.height) + 'px;');
+        div.attr('class', element.icon + ' ' + element.iconCssClass);
 
-        element.svgElement.attr('transform', 'translate( '+ element.position.x +', '+ element.position.y +' )')
+        element.svgElement.attr('transform', 'translate( ' + element.position.x + ', ' + element.position.y + ' )');
         this.setCenterEye(element.position, element.width, element.height);
     }
     private renderSequence( sequence: SequenceFlow ) {
-        let sequenceElement = <SequenceFlowPath> sequence.element;
-        let path = sequenceElement.svgElement.append('path');
+        const sequenceElement = <SequenceFlowPath> sequence.element;
+        const path = sequenceElement.svgElement.append('path');
 
         path.attr('id', sequence.id);
         path.attr('class', sequenceElement.cssClass );
@@ -204,47 +238,47 @@ export class Scene {
         path.attr('marker-end', 'url(#marker_arrow)');
 
         if (sequence.name) {
-            let text = sequenceElement.svgElement.append('text');
+            const text = sequenceElement.svgElement.append('text');
             text.attr('class', sequenceElement.textCssClass);
-            text.attr('transform', 'translate(' + (sequenceElement.textPosition.x) + ',' + (sequenceElement.textPosition.y + 10) +')')
+            text.attr('transform', 'translate(' + (sequenceElement.textPosition.x) + ',' + (sequenceElement.textPosition.y + 10) + ')');
             text.text(sequence.name);
         }
     }
 
     private renderLane(shape: BpmnElement, element: PrimitiveRect) {
-        let text = element.svgElement.append('text');
+        const text = element.svgElement.append('text');
         text.attr('class', element.textCssClass);
-        text.attr('x', -element.height /2);
+        text.attr('x', -element.height / 2);
         text.attr('y', 15);
         text.text(shape.name);
     }
     private renderSubProcess(shape: BpmnElement, element: PrimitiveRect) {
-        let name = shape.name;
+        const name = shape.name;
         if (name) {
-            let text = element.svgElement.append('text');
+            const text = element.svgElement.append('text');
             text.attr('class', element.textCssClass);
             text.text(name);
             text.attr('line-height', '1.2');
             text.attr('y', 20);
-            text.attr('x', element.width/2);
+            text.attr('x', element.width / 2);
         }
     }
     private renderTask(shape: BpmnElement, element: PrimitiveRect) {
-        let taskName = shape.name;
+        const taskName = shape.name;
 
         if (element.icon) {
-            let foreignObject = element.svgElement.append('foreignObject').attr('y', 5).attr('x', 5);
-            foreignObject.attr('style', 'width: 20px; height: 20px;')
+            const foreignObject = element.svgElement.append('foreignObject').attr('y', 5).attr('x', 5);
+            foreignObject.attr('style', 'width: 20px; height: 20px;');
             foreignObject.append('xhtml:span').attr('class', element.iconCssClass + ' ' + element.icon);
         }
 
         if (taskName) {
-            let text = element.svgElement.append('text');
+            const text = element.svgElement.append('text');
             text.attr('class', element.textCssClass);
             text.text(taskName);
             text.attr('line-height', '1.2');
-            text.attr('y', (element.height /2) + 5);
-            text.attr('x', element.width /2);
+            text.attr('y', (element.height / 2) + 5);
+            text.attr('x', element.width / 2);
         }
         this.setCenterEye(element.position, element.width, element.height);
     }
@@ -257,32 +291,22 @@ export class Scene {
             this.centerEye.maxY = position.y;
             return;
         }
-        
+
         if (this.centerEye.minX > position.x) {
             this.centerEye.minX = position.x;
-        } 
+        }
         if (this.centerEye.maxX < position.x + width) {
             this.centerEye.maxX = position.x + width;
-        } 
+        }
         if (this.centerEye.minY > position.y) {
             this.centerEye.minY = position.y;
         }
         if (this.centerEye.maxY < position.y + height) {
             this.centerEye.maxY = position.y + height;
-        }  
+        }
     }
 
-    private zoomed( transform, elements ) {
+    private zoomed(transform: any, elements: any) {
         elements.attr('transform', transform);
-    }
-    private zoomEngine() {
-        
-        this.zoomBehaviour = d3.zoom()
-        .scaleExtent([1 / 2, 4])
-        .on('zoom', () => this.zoomed( d3.event.transform, this.svgSceneElements ));
-
-        this.zoomEye = this.svgScene.append('rect');
-        this.zoomEye.attr('class', 'bpmn-flows-zoom-eye')
-        this.zoomEye.call( this.zoomBehaviour )
     }
 }

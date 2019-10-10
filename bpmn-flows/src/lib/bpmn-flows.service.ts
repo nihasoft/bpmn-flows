@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { BpmnImporter } from './core/importer/bpmn.importer';
 import { Scene } from './core/scene/scene';
 import { BpmnElements } from './core/elements/bpmn.elements';
-
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,8 @@ export class BpmnFlowsService {
   }
   bpmnDiagramParser( text ) {
       const parser = new DOMParser();
-      const xml = parser.parseFromString( text, "text/xml" );
-      this.bpmnImporter = new BpmnImporter( xml );
+      const xml = parser.parseFromString(text, 'text/xml');
+      this.bpmnImporter = new BpmnImporter(xml);
       this.eventImportedBpmn();
   }
   eventImportedBpmn() {
@@ -29,14 +29,14 @@ export class BpmnFlowsService {
           if ( this.bpmnElements ) {
             this.renderBpmn();
           }
-      })
+      });
   }
   eventRenderedBpmn() {
       this.scene.loaded$.subscribe(( loaded ) => {
           if (loaded) {
               console.log("Loaded...")
           }
-      })
+      });
   }
   getBpmnDiagram( bpmnFilePath ): void {
       this.http.get(bpmnFilePath, {responseType: 'text'}).subscribe(( response ) => {

@@ -13,7 +13,8 @@ export class BpmnElement {
     out: Array<SequenceFlow>;
     element: PrimitiveElement;
     childrens: Array<BpmnElement> = [];
-    data: any = {}
+    data: any = {};
+
     constructor( bpmnDocumentElement: any ) {
         this.form = bpmnDocumentElement.form;
         this.id = bpmnDocumentElement.id;
@@ -21,7 +22,7 @@ export class BpmnElement {
         this.type = bpmnDocumentElement.type;
         this.in = [];
         this.out = [];
-        this.element = new BpmnTypes[ bpmnDocumentElement.type ]();
+        this.element = new BpmnTypes[bpmnDocumentElement.type](bpmnDocumentElement.data);
         this.data = bpmnDocumentElement.data;
     }
 }

@@ -12,7 +12,7 @@ cache:
     - node_modules
 
 script:
-  - cd bpmn-flows && npm install && npm run build-prod
+  - cd bpmn-flows && npm install && yarn build-prod
 
 before_install:
   - export CHROME_BIN=chromium-browser

@@ -8,6 +8,7 @@ export class SequenceFlow {
     id: string;
     element: PrimitiveSequence;
     name: string;
+
     constructor( id: string, name: string, source: BpmnElement, target: BpmnElement ) {
         this.id = id;
         this.name = name;

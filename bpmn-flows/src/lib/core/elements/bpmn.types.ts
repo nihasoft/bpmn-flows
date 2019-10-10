@@ -1,8 +1,8 @@
 import { UserTaskRect } from './shape/user.task.rect';
 import { StartEventCircle } from './shape/start.event.circle';
 import { EndEventCircle } from './shape/end.event.circle';
-import { SubProcessRect } from './shape/sub.process.rect'
-import { SequenceFlowPath } from './sequence/sequence.flow.path'
+import { SubProcessRect } from './shape/sub.process.rect';
+import { SequenceFlowPath } from './sequence/sequence.flow.path';
 import { ExclusiveGatewayRhombus } from './shape/exclusive.gateway.rhombus';
 import { ParallelGatewayRhombus } from './shape/parallel.gateway.rhombus';
 import { ManualTaskRect } from './shape/manual.task.rect';
@@ -10,7 +10,6 @@ import { ScriptTaskRect } from './shape/script.task.rect';
 import { LaneRect } from './shape/lane.rect';
 import { ParticipantRect } from './shape/participant.rect';
 import { BusinessRuleTaskRect } from './shape/business.rule.task.rect';
-import { IntermediateCatchEventCircle } from './shape/intermediate-catch.event.circle';
 import { IntermediateThrowEventCircle } from './shape/intermediate-throw.event.circle';
 import { ServiceTaskRect } from './shape/service.task.rect';
 import { PrimitiveRect } from './shape/primitive.rect';
@@ -49,4 +48,4 @@ export const BpmnTypes = {
     'sendTask': SendTaskRect,
     'boundaryEvent': BoundaryEventCircle,
     'transaction': TransactionSubProccessRect
-}
+};

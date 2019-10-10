@@ -8,7 +8,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [ HttpClient ],
-  declarations: [BpmnFlowsComponent],
-  exports: [BpmnFlowsComponent]
+  declarations: [ BpmnFlowsComponent ],
+  exports: [ BpmnFlowsComponent ]
 })
 export class BpmnFlowsModule { }

@@ -4,24 +4,25 @@ import { BpmnElement } from '../elements/shape/shape.model';
 import { LaneRect } from '../elements/shape/lane.rect';
 
 export class BpmnImporter {
-    private process;
-    private diagram;
-    private collaboration;
+    private process: any;
+    private diagram: any;
+    private collaboration: any;
     private bpmnElements = new BpmnElements();
-    bpmnElements$ = new BehaviorSubject<BpmnElements>(null);
 
-    constructor(xml) {
+    public bpmnElements$ = new BehaviorSubject<BpmnElements>(null);
+
+    constructor(xml: any) {
         this.getElements(xml);
     }
     private createLane(dom: any, type: string, father: any): BpmnElement {
         const childs = this.htmlCollectionToArray( dom.children );
         if (type === 'laneSet') {
-            for (let lane of childs) {
+            for (const lane of childs) {
                 this.importElement(lane, null);
             }
             return;
         }
-        
+
         const bpmnDocumentElement = {
             id: dom.getAttribute( 'id' ),
             name: dom.getAttribute( 'name' ),
@@ -34,12 +35,12 @@ export class BpmnImporter {
             shape.father = father;
         }
 
-        for (let child of childs) {
+        for (const child of childs) {
             if (child.tagName === 'bpmn:flowNodeRef') {
                 element.flowRefs.push('' + child.childNodes[0]);
             } else if (child.tagName === 'bpmn:childLaneSet') {
                 const laneChilds = this.htmlCollectionToArray( child.children );
-                for (let laneChild of laneChilds) {
+                for (const laneChild of laneChilds) {
                     shape.childrens.push(this.importElement(laneChild, shape));
                 }
             }
@@ -47,8 +48,7 @@ export class BpmnImporter {
         return shape;
     }
     private createShape(dom: HTMLElement, type: string, father: any): BpmnElement {
-        try 
-        {
+        try {
             const bpmnDocumentElement: any = {
                 id: dom.getAttribute( 'id' ),
                 name: dom.getAttribute( 'name' ),
@@ -57,8 +57,8 @@ export class BpmnImporter {
             };
 
             // Todo get the childs that isn't incoming or outcoming because the child can be a condition
-            let childs = this.htmlCollectionToArray(dom.children);
-            for (let child of childs) {
+            const childs = this.htmlCollectionToArray(dom.children);
+            for (const child of childs) {
                 if (type.includes('process')) {
                     this.proccessSubProccessChild(child, bpmnDocumentElement);
                     if (dom.getAttribute('triggeredByEvent=')) {
@@ -66,6 +66,8 @@ export class BpmnImporter {
                     }
                 } else if (type.includes('startEvent')) {
                     this.proccessStartEventChild(child, bpmnDocumentElement);
+                } else if (type.includes('endEvent')) {
+                    this.proccessEndEventChild(child, bpmnDocumentElement);
                 } else if (type.includes('intermediateThrowEvent')) {
                     this.proccessIntermediateThrowEvent(child, bpmnDocumentElement);
                 } else if (type.includes('intermediateCatchEvent')) {
@@ -75,14 +77,18 @@ export class BpmnImporter {
                 }
             }
 
-            let shape = this.bpmnElements.createElement( bpmnDocumentElement );
+            if (dom.getAttribute('cancelActivity')) {
+                bpmnDocumentElement.data.cancelActivity = (dom.getAttribute('cancelActivity') === 'true') ? true : false;
+            }
 
-            if ( father ) {
+            const shape = this.bpmnElements.createElement( bpmnDocumentElement );
+
+            if (father) {
                 shape.father = father;
             }
 
             return shape;
-        } catch ( ex ) {
+        } catch (ex) {
             console.warn(dom);
             console.warn('Shape has not a known type: ' + type);
         }
@@ -91,50 +97,90 @@ export class BpmnImporter {
         return (dom.getAttribute('triggeredByEvent=') && dom.getAttribute('triggeredByEvent=') === 'true') ? true : false;
     }
     private proccessBoundaryEvent(child: HTMLElement, bpmnDocumentElement: any): void {
-        let childType = child.tagName.split(':')[1];
+        const childType = child.tagName.split(':')[1];
         if (childType === 'escalationEventDefinition') {
-            bpmnDocumentElement.data.event = 'escalation';
+            bpmnDocumentElement.data.eventIcon = 'escalation';
         } else if (childType === 'conditionalEventDefinition') {
-            bpmnDocumentElement.data.event = 'conditional';
+            bpmnDocumentElement.data.eventIcon = 'conditional';
             bpmnDocumentElement.data.condition = child.getElementsByTagName('bpmn:condition');
         } else if (childType === 'messageEventDefinition') {
-            bpmnDocumentElement.data.event = 'message';   
+            bpmnDocumentElement.data.eventIcon = 'far fa-envelope';
         } else if (childType === 'timerEventDefinition') {
-            bpmnDocumentElement.data.event = 'timer';
+            bpmnDocumentElement.data.eventIcon = 'far fa-clock';
         } else if (childType === 'scalationEventDefinition') {
-            bpmnDocumentElement.data.event = 'scalation';
+            bpmnDocumentElement.data.eventIcon = 'scalation';
         } else if (childType === 'errorEventDefinition') {
-            bpmnDocumentElement.data.event = 'error';
+            bpmnDocumentElement.data.eventIcon = 'error';
         } else if (childType === 'signalEventDefinition') {
-            bpmnDocumentElement.data.event = 'signal';
+            bpmnDocumentElement.data.eventIcon = 'signal';
         } else if (childType === 'compensateEventDefinition') {
-            bpmnDocumentElement.data.event = 'compensate';
+            bpmnDocumentElement.data.eventIcon = 'compensate';
+        } else {
+            console.warn('Event type not known: ' + childType);
+            return;
         }
+        bpmnDocumentElement.data.eventType = childType;
     }
     private proccessIntermediateCatchEvent(child: HTMLElement, bpmnDocumentElement: any): void {
-        let childType = child.tagName.split(':')[1];
+        const childType = child.tagName.split(':')[1];
         if (childType === 'timerEventDefinition') {
-            bpmnDocumentElement.data.event = 'timer';
+            bpmnDocumentElement.data.eventIcon = 'far fa-clock';
         } else if (childType === 'messageEventDefinition') {
-            bpmnDocumentElement.data.event = 'message';
+            bpmnDocumentElement.data.eventIcon = 'far fa-envelope';
         } else if (childType === 'signalEventDefinition') {
-            bpmnDocumentElement.data.event = 'signal';
+            bpmnDocumentElement.data.eventIcon = 'signal';
+        } else {
+            console.warn('Event type not known: ' + childType);
+            return;
         }
+        bpmnDocumentElement.data.eventType = childType;
     }
     private proccessIntermediateThrowEvent(child: HTMLElement, bpmnDocumentElement: any): void {
-        let childType = child.tagName.split(':')[1];
-        if (childType === 'linkEventDefinition') {
-            bpmnDocumentElement.data.event = 'link';
+        const childType = child.tagName.split(':')[1];
+        if (childType === 'timerEventDefinition') {
+            bpmnDocumentElement.data.eventIcon = 'fas fa-clock';
+        } else if (childType === 'messageEventDefinition') {
+            bpmnDocumentElement.data.eventIcon = 'fas fa-envelope';
+        } else if (childType === 'signalEventDefinition') {
+            bpmnDocumentElement.data.eventIcon = 'signal';
+        } else if (childType === 'escalationEventDefinition') {
+            bpmnDocumentElement.data.eventIcon = 'signal';
+        } else {
+            console.warn('Event type not known: ' + childType);
+            return;
         }
+        bpmnDocumentElement.data.eventType = childType;
     }
     private proccessStartEventChild(child: HTMLElement, bpmnDocumentElement: any): void {
-        let childType = child.tagName.split(':')[1];
+        const childType = child.tagName.split(':')[1];
         if (childType === 'signalEventDefinition') {
-            bpmnDocumentElement.data.event = 'signal';
+            bpmnDocumentElement.data.eventIcon = 'far fa-clock';
+        } else if (childType === 'messageEventDefinition') {
+            bpmnDocumentElement.data.eventIcon = 'far fa-envelope';
+        } else if (childType === 'timerEventDefinition') {
+            bpmnDocumentElement.data.eventIcon = 'far fa-clock';
+        } else {
+            console.warn('Event type not known: ' + childType);
+            return;
         }
+        bpmnDocumentElement.data.eventType = childType;
+    }
+    private proccessEndEventChild(child: HTMLElement, bpmnDocumentElement: any): void {
+        const childType = child.tagName.split(':')[1];
+        if (childType === 'signalEventDefinition') {
+            bpmnDocumentElement.data.eventIcon = 'signal';
+        } else if (childType === 'messageEventDefinition') {
+            bpmnDocumentElement.data.eventIcon = 'fas fa-envelope';
+        } else if (childType === 'timerEventDefinition') {
+            bpmnDocumentElement.data.eventIcon = 'fas fa-clock';
+        } else {
+            console.warn('Event type not known: ' + childType);
+            return;
+        }
+        bpmnDocumentElement.data.eventType = childType;
     }
     private proccessSubProccessChild(child: HTMLElement, bpmnDocumentElement: any): void {
-        let childType = child.tagName.split(':')[1];
+        const childType = child.tagName.split(':')[1];
         if (childType === 'standardLoopCharacteristics') {
             bpmnDocumentElement.data.multiple = 'repeat';
         } else if (childType === 'multiInstanceLoopCharacteristics') {
@@ -163,21 +209,21 @@ export class BpmnImporter {
         }
 
         childs.forEach(( child ) => {
-            const tagName = child.tagName;       
+            const tagName = child.tagName;
             if ( tagName === 'bpmn:incoming' ) {
                 sequenceIn.push( child );
             } else if ( tagName === 'bpmn:outgoing' ) {
-                sequenceOut.push( child )
+                sequenceOut.push( child );
             } else  if ( tagName === 'bpmn:sequenceFlow') {
-                sequences.push( child )
+                sequences.push( child );
             } else if (child.tagName !== 'bpmn:multiInstanceLoopCharacteristics') {
                 bpmnElement.childrens.push(this.importElement( child, bpmnElement ));
             }
         });
 
         sequences.forEach(( sequence ) => {
-            this.importSequenceFlow( sequence );   
-        })
+            this.importSequenceFlow( sequence );
+        });
         return bpmnElement;
     }
     private getElements(xml: any): void {
@@ -191,12 +237,12 @@ export class BpmnImporter {
         this.bpmnElements$.next(this.bpmnElements);
     }
     private getNodePosition(node: any): any {
-        return {x: parseInt(node.getAttribute('x')), y: parseInt( node.getAttribute('y'))}
+        return {x: parseInt(node.getAttribute('x'), 10), y: parseInt( node.getAttribute('y'), 10)};
     }
     private htmlCollectionToArray(doms: HTMLCollection): Array<HTMLElement> {
         const childs = [];
-        for( let i = 0; i < doms.length; i++ ) {
-            childs.push( doms[i] )
+        for (let i = 0; i < doms.length; i++ ) {
+            childs.push(doms[i]);
         }
         return childs;
     }
@@ -214,13 +260,13 @@ export class BpmnImporter {
         const source: string = sequence.getAttribute('sourceRef');
         const target: string = sequence.getAttribute('targetRef');
         const id: string = sequence.getAttribute('id');
-        const name: string = sequence.getAttribute('name')
+        const name: string = sequence.getAttribute('name');
 
         this.bpmnElements.createSequence(id, name, source, target);
     }
     private processCollaboration(): void {
         const childs: any = this.htmlCollectionToArray( this.collaboration.children );
-        for (let child of childs) {
+        for (const child of childs) {
             if ( child.tagName === 'bpmn:participant' ) {
                 this.importElement( child, null );
             } else {
@@ -229,15 +275,15 @@ export class BpmnImporter {
         }
     }
     private processBpmnProcess(): void {
-        const childs: any = this.htmlCollectionToArray( this.process.children );
-        const sequenceFlows: any = childs.filter(( child ) => child.tagName === 'bpmn:sequenceFlow' );
-        const elements: any = childs.filter(( child ) => child.tagName !== 'bpmn:sequenceFlow' );
-        
+        const childs: any = this.htmlCollectionToArray(this.process.children);
+        const sequenceFlows: any = childs.filter((child: any) => child.tagName === 'bpmn:sequenceFlow' );
+        const elements: any = childs.filter((child: any) => child.tagName !== 'bpmn:sequenceFlow' );
+
         this.bpmnElements.processId = this.process.getAttribute('id');
         this.bpmnElements.processName = this.process.getAttribute('name');
 
-        elements.forEach(( element ) => this.importElement( element, null ));
-        sequenceFlows.forEach(( sequence ) => this.importSequenceFlow( sequence ));
+        elements.forEach((element: any) => this.importElement( element, null ));
+        sequenceFlows.forEach((sequence: any) => this.importSequenceFlow( sequence ));
     }
     private processDiagram(): void {
         const plane = this.diagram.getElementsByTagName('bpmndi:BPMNPlane')[0];
@@ -252,24 +298,23 @@ export class BpmnImporter {
                     console.warn('Diagram element not known: ' + child.tagName);
                 }
             }
-        })
+        });
     }
     private processSequences(child): void {
         const id = child.getAttribute( 'bpmnElement' );
         const childNodes = child.childNodes;
-        
+
         childNodes.forEach(( node ) => {
             this.processSequenceChild(id, node);
-        })
+        });
     }
-
     private processSequenceChild(id: string, node: any) {
         if (node.nodeName !== '#text') {
             if (node.tagName === 'di:waypoint')  {
-                let position = this.getNodePosition(node);
+                const position = this.getNodePosition(node);
                 this.bpmnElements.setSequenceWaypoints(id, position);
-            } else if(  node.tagName === 'bpmndi:BPMNLabel') {
-                let position = this.getNodePosition(node.childNodes[1]);
+            } else if (node.tagName === 'bpmndi:BPMNLabel') {
+                const position = this.getNodePosition(node.childNodes[1]);
                 this.bpmnElements.setSequenceNamePlacement(id, position);
             }
         }
@@ -277,30 +322,30 @@ export class BpmnImporter {
     private processShapes(child: any): void {
         const id: any = child.getAttribute( 'bpmnElement' );
         const childNodes: any = child.childNodes;
-        
-        let bpmnElement: BpmnElement = this.bpmnElements.getBpmnElementById(id);
+
+        const bpmnElement: BpmnElement = this.bpmnElements.getBpmnElementById(id);
         if (bpmnElement) {
             if (bpmnElement.type.search('process') > -1) {
                 bpmnElement.data.expanded = (child.getAttribute('isExpanded') ? child.getAttribute('isExpanded') : false);
             }
-            childNodes.forEach(( node ) => {
+            childNodes.forEach((node: any) => {
                 this.processShapeChild(id, node);
-            })
+            });
         }
     }
     private processShapeChild(id: string, node: any) {
         if (node.nodeName !== '#text') {
             if (node.tagName === 'dc:Bounds') {
-                let position: any = this.getNodePosition(node);
-                let height: number = parseInt(node.getAttribute( 'height' ));
-                let width: number = parseInt(node.getAttribute( 'width' ));
+                const position: any = this.getNodePosition(node);
+                const height: number = parseInt(node.getAttribute( 'height' ), 10);
+                const width: number = parseInt(node.getAttribute( 'width' ), 10);
                 this.bpmnElements.setShapeAttributes(id, width, height, position);
             } else if (node.tagName === 'bpmndi:BPMNLabel') {
-                let position = this.getNodePosition(node.childNodes[1]);
+                const position = this.getNodePosition(node.childNodes[1]);
                 this.bpmnElements.setShapeNamePlacement(id, position);
             } else {
                 console.warn(node);
-                console.warn('Element not known')
+                console.warn('Element not known');
             }
         }
     }

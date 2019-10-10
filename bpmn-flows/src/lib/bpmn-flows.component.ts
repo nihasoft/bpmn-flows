@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { BpmnFlowsService } from './bpmn-flows.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { BpmnFlowsService } from './bpmn-flows.service';
 })
 export class BpmnFlowsComponent implements OnInit {
   @Input() fileUrl: string;
+
   constructor(private bpmnFlowsService: BpmnFlowsService) { }
 
   ngOnInit() {

@@ -9,41 +9,46 @@ import { BpmnElements } from './core/elements/bpmn.elements';
   providedIn: 'root'
 })
 export class BpmnFlowsService {
-  bpmnElements: BpmnElements;
-  bpmnImporter: BpmnImporter;
-  scene: Scene;
+  public bpmnElements: BpmnElements;
+  public bpmnImporter: BpmnImporter;
+  public scene: Scene;
+
   constructor( private http: HttpClient ) {}
 
-  initialize( bpmnFile: string ) {
+  public initialize( bpmnFile: string ) {
       this.getBpmnDiagram( bpmnFile );
   }
-  bpmnDiagramParser( text ) {
+  public bpmnDiagramParser(text: string) {
       const parser = new DOMParser();
       const xml = parser.parseFromString(text, 'text/xml');
       this.bpmnImporter = new BpmnImporter(xml);
       this.eventImportedBpmn();
   }
-  eventImportedBpmn() {
-      this.bpmnImporter.bpmnElements$.subscribe(( bpmnElements ) => {
+  public eventImportedBpmn() {
+      this.bpmnImporter.bpmnElements$.subscribe(
+        (bpmnElements: any ) => {
           this.bpmnElements = bpmnElements;
           if ( this.bpmnElements ) {
             this.renderBpmn();
           }
-      });
+        }
+    );
   }
-  eventRenderedBpmn() {
-      this.scene.loaded$.subscribe(( loaded ) => {
+  public eventRenderedBpmn() {
+      this.scene.loaded$.subscribe(
+        (loaded: any ) => {
           if (loaded) {
-              console.log("Loaded...")
+              console.log('Loaded...');
           }
-      });
+        }
+    );
   }
-  getBpmnDiagram( bpmnFilePath ): void {
+  public getBpmnDiagram( bpmnFilePath ): void {
       this.http.get(bpmnFilePath, {responseType: 'text'}).subscribe(( response ) => {
         this.bpmnDiagramParser( response );
-      })
+      });
   }
-  renderBpmn() {
+  public renderBpmn() {
       this.scene = new Scene( this.bpmnElements, 'bpmn-flows-container' );
       this.scene.init();
       this.eventRenderedBpmn();

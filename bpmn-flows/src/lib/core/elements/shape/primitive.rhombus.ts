@@ -12,7 +12,8 @@ export class PrimitiveRhombus extends PrimitiveElement {
     type: string;
     width: number;
     points: string;
-    constructor() { 
+
+    constructor() {
         super();
         this.rx = 2,
         this.ry = 2,

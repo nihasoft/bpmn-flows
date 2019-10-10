@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { BpmnFlowsComponent } from './bpmn-flows.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
@@ -7,7 +8,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [ HttpClient ],
-  declarations: [BpmnFlowsComponent],
-  exports: [BpmnFlowsComponent]
+  declarations: [ BpmnFlowsComponent ],
+  exports: [ BpmnFlowsComponent ]
 })
 export class BpmnFlowsModule { }

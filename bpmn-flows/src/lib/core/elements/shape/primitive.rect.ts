@@ -4,8 +4,9 @@ export class PrimitiveRect extends PrimitiveElement {
     rx: number;
     ry: number;
     type: string;
-    constructor() { 
-        super()
+    constructor() {
+        super();
+
         this.rx = 2,
         this.ry = 2,
         this.type = 'rect';

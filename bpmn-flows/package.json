@@ -3,12 +3,14 @@
   "version": "0.1.4",
   "description": "Mechanism to view and edit bpmn 2.0 in angular",
   "scripts": {
+    "analyse": "yarn lint && yarn build-stats && webpack-bundle-analyzer dist/webapp/stats-es5.json",
     "copy": "cpx src/lib/bpmn-flows.component.scss dist/bpmn-flows/ && cpx src/lib/bpmn-flows.variables.scss dist/bpmn-flows/ && cpx ../README.md dist/bpmn-flows",
     "copy-dist": "cpx dist/ ../bpmn-flows-demo/node_modules/@nihasoft/",
-    "build-prod": "npm run test-prod && ng build --prod && npm run copy",
-    "test-prod": "ng test --no-watch",
-    "test": "ng test",
-    "lint": "ng lint",
+    "build-prod": "yarn lint && npm run test-prod && ng build --prod && npm run copy",
+    "test-coverage": "yarn lint && ng test --code-coverage --browsers CustomChromeHeadless --no-watch",
+    "lint": "ng lint && stylelint \"./**/*.scss\" ",
+    "test-prod": "ng test --browsers CustomChromeHeadless --no-watch",
+    "test": "yarn lint && ng test --browsers CustomChromeHeadless",
     "e2e": "ng e2e",
     "publish-prod": "npm run build-prod && cd dist/bpmn-flows && npm publish --access=public",
     "publish-dev": "npm run build-prod && npm run copy-dist",
@@ -16,10 +18,11 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.7.2",
+    "@fortawesome/fontawesome-free": "^5.9.0",
     "d3": "^5.9.1",
     "intl": "^1.2.5",
-    "yarn": "^1.19.0"
+    "yarn": "^1.19.0",
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.8",
@@ -44,13 +47,19 @@
     "karma-coverage-istanbul-reporter": "~2.0.0",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-scss-preprocessor": "^4.0.0",
     "ng-packagr": "^5.4.0",
+    "node-sass": "^4.12.0",
     "protractor": "^5.4.0",
+    "stylelint": "^11.0.0",
+    "stylelint-config-standard": "^19.0.0",
+    "stylelint-scss": "^3.11.0",
     "ts-node": "~5.0.1",
     "tsickle": "^0.37.0",
     "tslib": "^1.9.0",
-    "tslint": "~5.13.0",
+    "tslint": "~5.11.0",
     "typescript": "3.5.3",
+    "webpack-bundle-analyzer": "~3.5.0",
     "zone.js": "~0.9.1"
   },
   "repository": {

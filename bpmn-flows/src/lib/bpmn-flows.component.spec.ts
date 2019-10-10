@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { BpmnFlowsComponent } from './bpmn-flows.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BpmnFlowsService } from './bpmn-flows.service';
 
 describe('BpmnFlowsComponent', () => {
@@ -9,18 +9,25 @@ describe('BpmnFlowsComponent', () => {
   let fixture: ComponentFixture<BpmnFlowsComponent>;
 
   beforeEach(async(() => {
-    spyOn(console, 'warn');
+    // spyOn(console, 'warn')
     TestBed.configureTestingModule({
       imports: [ HttpClientModule ],
       declarations: [ BpmnFlowsComponent ],
       providers: [ BpmnFlowsService, HttpClient ]
     })
     .compileComponents();
-
     fixture = TestBed.createComponent(BpmnFlowsComponent);
     component = fixture.componentInstance;
+    component.fileUrl = 'assets/all.bpmn';
+    fixture.detectChanges();
   }));
-  it('Should create', () => {
+
+  it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should not print warn to console', function() {
+    fixture.detectChanges();
+    // (expect(console.warn).toHaveBeenCalledTimes(0));
   });
 });

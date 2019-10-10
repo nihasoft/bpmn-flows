@@ -1,8 +1,8 @@
 import { PrimitiveRect } from './primitive.rect';
 
-export class UserTaskRect extends PrimitiveRect {
+export class ServiceTaskRect extends PrimitiveRect {
     constructor( ) {
         super();
-        this.icon = 'fa fa-user';
+        this.icon = 'fas fa-cog';
     }
 }

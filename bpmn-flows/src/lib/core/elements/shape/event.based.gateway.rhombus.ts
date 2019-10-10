@@ -1,6 +1,6 @@
 import { PrimitiveRhombus } from './primitive.rhombus';
 
-export class ExclusiveGatewayRhombus extends PrimitiveRhombus {
+export class EventBasedGatewayRhombus extends PrimitiveRhombus {
     constructor( ) {
         super();
         this.icon = 'fa fa-times';
